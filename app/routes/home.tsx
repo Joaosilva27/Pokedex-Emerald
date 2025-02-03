@@ -1,0 +1,42 @@
+import { Outlet } from "react-router";
+import type { Route } from "./+types/home";
+import Header from "~/components/Header";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import PokemonContainer from "~/components/PokemonContainer";
+
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "New React Router App" },
+    { name: "description", content: "Welcome to React Router!" },
+  ];
+}
+
+export default function Home() {
+  const [pokemonData, setPokemonData] = useState<Array<any>>([]);
+
+  useEffect(() => {
+    axios
+      .get("https://pokeapi.co/api/v2/pokedex/hoenn/")
+
+      .then((res) => {
+        const data = res.data.pokemon_entries;
+
+        setPokemonData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(`Error trying to fetch the data: ${error}`);
+      });
+  }, []);
+
+  return (
+    <div>
+      <Header />
+      <Outlet />
+      {pokemonData.map((data, index) => (
+        <PokemonContainer key={index} pokemonName={data.pokemon_species.name} />
+      ))}
+    </div>
+  );
+}
