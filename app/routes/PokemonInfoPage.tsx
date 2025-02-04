@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function PokemonInfoPage() {
   const params = useParams();
-  const [pokemonData, setPokemonData] = useState<Array<any>>([]);
+  const [pokemonData, setPokemonData] = useState<any | null>(null);
 
   useEffect(() => {
     axios
@@ -15,7 +15,7 @@ export default function PokemonInfoPage() {
 
         setPokemonData(data);
 
-        console.log(pokemonData);
+        console.log(data);
       })
 
       .catch((err) => {
@@ -23,15 +23,36 @@ export default function PokemonInfoPage() {
       });
   }, []);
 
+  if (!pokemonData) {
+    return <div>Loading Pokémon data...</div>;
+  }
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col p-3">
       <h1 className="text-5xl capitalize">{params.PokemonName}</h1>
       <img
         className="h-70 w-70"
         src={`https://img.pokemondb.net/artwork/${params.PokemonName}.jpg`}
       />
       <span>Pokemon Sprites:</span>
-      <img className="w-30 h-30" src={pokemonData.sprites.front_default} />
+      <div className="flex">
+        <img className="w-30 h-30" src={pokemonData.sprites.back_default} />
+        <img
+          className="w-30 h-30 -ml-6"
+          src={pokemonData.sprites.front_default}
+        />
+      </div>
+      <span>Shiny Pokemon Sprites:</span>
+      <div className="flex">
+        <img className="w-30 h-30" src={pokemonData.sprites.back_shiny} />
+        <img
+          className="w-30 h-30 -ml-6"
+          src={pokemonData.sprites.front_shiny}
+        />
+      </div>
+
+      <div></div>
+
       <span>{pokemonData.order}</span>
     </div>
   );
