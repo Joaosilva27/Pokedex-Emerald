@@ -2,7 +2,6 @@ interface PokemonContainerProps {
   pokemonId: number;
   pokemonName: string;
   pokemonImg: string;
-  pokemonType: string;
 }
 
 export default function PokemonContainer({

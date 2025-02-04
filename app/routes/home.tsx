@@ -3,7 +3,8 @@ import type { Route } from "./+types/home";
 import Header from "~/components/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PokemonContainer from "~/components/PokemonContainer";
+import { Link } from "react-router";
+import PokemonContainer from "~/routes/PokemonContainer";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -36,12 +37,14 @@ export default function Home() {
       <Outlet />
       <div className="flex flex-row flex-wrap p-10 pt-2">
         {pokemonData.map((data, index) => (
-          <PokemonContainer
-            key={index}
-            pokemonId={data.entry_number}
-            pokemonName={data.pokemon_species.name}
-            pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
-          />
+          <Link to={`/${data.pokemon_species.name}`}>
+            <PokemonContainer
+              key={index}
+              pokemonId={data.entry_number}
+              pokemonName={data.pokemon_species.name}
+              pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
+            />
+          </Link>
         ))}
       </div>
     </div>
