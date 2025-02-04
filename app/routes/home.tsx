@@ -14,6 +14,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   const [pokemonData, setPokemonData] = useState<Array<any>>([]);
+  const [pokemonImages, setPokemonImages] = useState<Array<string>>([]);
 
   useEffect(() => {
     axios
@@ -34,9 +35,16 @@ export default function Home() {
     <div>
       <Header />
       <Outlet />
-      {pokemonData.map((data, index) => (
-        <PokemonContainer key={index} pokemonName={data.pokemon_species.name} />
-      ))}
+      <div className="flex flex-row flex-wrap p-10">
+        {pokemonData.map((data, index) => (
+          <PokemonContainer
+            key={index}
+            pokemonId={data.entry_number}
+            pokemonName={data.pokemon_species.name}
+            pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
+          />
+        ))}
+      </div>
     </div>
   );
 }
