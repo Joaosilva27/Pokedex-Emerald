@@ -14,7 +14,6 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   const [pokemonData, setPokemonData] = useState<Array<any>>([]);
-  const [pokemonImages, setPokemonImages] = useState<Array<string>>([]);
 
   useEffect(() => {
     axios
@@ -35,7 +34,7 @@ export default function Home() {
     <div>
       <Header />
       <Outlet />
-      <div className="flex flex-row flex-wrap p-10">
+      <div className="flex flex-row flex-wrap p-10 pt-2">
         {pokemonData.map((data, index) => (
           <PokemonContainer
             key={index}
