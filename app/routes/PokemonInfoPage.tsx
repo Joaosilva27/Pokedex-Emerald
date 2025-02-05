@@ -108,6 +108,7 @@ export default function PokemonInfoPage() {
                 ice: "bg-cyan-300",
                 dragon: "bg-purple-700",
                 dark: "bg-gray-800",
+                fairy: "bg-pink-300",
               };
 
               return (
