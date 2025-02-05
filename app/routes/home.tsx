@@ -4,6 +4,7 @@ import Header from "~/components/Header";
 import { Suspense, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
+import PokeballLoadingIcon from "~/icons/pokeball.png";
 import PokemonContainer from "~/routes/PokemonContainer";
 
 export function meta({}: Route.MetaArgs) {
@@ -40,7 +41,10 @@ export default function Home() {
       <Outlet />
       {isLoading ? (
         <div className="flex flex-center items-center text-4xl mt-60">
-          <span>Loading...</span>
+          <div className="flex items-center">
+            <span>Loading...</span>
+            <img src={PokeballLoadingIcon} className="ml-2 h-8 w-8" />
+          </div>
         </div>
       ) : (
         <div className="flex flex-row flex-wrap p-10 pt-2">

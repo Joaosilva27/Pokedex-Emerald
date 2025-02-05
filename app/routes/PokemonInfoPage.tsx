@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
+import PokeballLoadingIcon from "~/icons/pokeball.png";
 
 export default function PokemonInfoPage() {
   const params = useParams();
@@ -24,7 +25,12 @@ export default function PokemonInfoPage() {
   }, []);
 
   if (!pokemonData) {
-    return <div>Loading Pokémon data...</div>;
+    return (
+      <div className="flex flex-center justify-center items-center text-4xl mt-60">
+        <span>Loading...</span>
+        <img src={PokeballLoadingIcon} className="ml-2 h-8 w-8" />
+      </div>
+    );
   }
 
   return (
