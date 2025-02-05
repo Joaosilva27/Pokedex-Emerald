@@ -30,23 +30,32 @@ export default function PokemonInfoPage() {
   return (
     <div className="flex flex-col p-3">
       <h1 className="text-5xl capitalize">{params.PokemonName}</h1>
-      <img
-        className="h-70 w-70"
-        src={`https://img.pokemondb.net/artwork/${params.PokemonName}.jpg`}
-      />
+      <div className="w-80 h-80 bg-gray-100 rounded-lg flex items-center justify-center">
+        <img
+          className="w-full h-full object-contain p-4"
+          src={`https://img.pokemondb.net/artwork/${params.PokemonName}.jpg`}
+          alt={params.PokemonName}
+        />
+      </div>
       <span>Pokemon Sprites:</span>
       <div className="flex">
-        <img className="w-30 h-30" src={pokemonData.sprites.back_default} />
         <img
-          className="w-30 h-30 -ml-6"
+          className="w-30 h-30 bg-gray-100 rounded-lg"
+          src={pokemonData.sprites.back_default}
+        />
+        <img
+          className="w-30 h-30 bg-gray-100 rounded-lg ml-2"
           src={pokemonData.sprites.front_default}
         />
       </div>
       <span>Shiny Pokemon Sprites:</span>
       <div className="flex">
-        <img className="w-30 h-30" src={pokemonData.sprites.back_shiny} />
         <img
-          className="w-30 h-30 -ml-6"
+          className="w-30 h-30 bg-gray-100 rounded-lg"
+          src={pokemonData.sprites.back_shiny}
+        />
+        <img
+          className="w-30 h-30 -ml-6 bg-gray-100 rounded-lg ml-2"
           src={pokemonData.sprites.front_shiny}
         />
       </div>
