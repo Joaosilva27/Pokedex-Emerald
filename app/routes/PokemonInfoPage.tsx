@@ -74,14 +74,54 @@ export default function PokemonInfoPage() {
   return (
     <div className="flex flex-col items-center p-3">
       {/* Main Pokemon Image with its respective name */}
-      <div className="w-80 h-80 bg-gray-100 rounded-lg flex flex-col items-center justify-center">
-        <h1 className="text-4xl capitalize">{params.PokemonName}</h1>
+      <div className="flex flex-wrap justify-center bg-gray-100 rounded-lg">
+        <div className="w-80 h-80 flex flex-col items-center justify-center">
+          <h1 className="text-4xl capitalize">{params.PokemonName}</h1>
 
-        <img
-          className="w-full h-full object-contain p-4"
-          src={`https://img.pokemondb.net/artwork/${params.PokemonName}.jpg`}
-          alt={params.PokemonName}
-        />
+          <img
+            className="w-full h-full object-contain p-4"
+            src={`https://img.pokemondb.net/artwork/${params.PokemonName}.jpg`}
+            alt={params.PokemonName}
+          />
+        </div>
+        <div className="w-80 h-80 bg-gray-100 rounded-lg flex flex-col items-center justify-center">
+          <h6 className="text-3xl">Pokédex data</h6>
+          <span>National № {pokemonData.id}</span>
+          <div className="flex">
+            {/* Fetch pokemon type and conditionally get bg color. It's a mess but it is what it is */}
+            {pokemonData.types.map((array, key) => {
+              const typeColorMap = {
+                normal: "bg-gray-400",
+                fighting: "bg-red-700",
+                flying: "bg-blue-200",
+                poison: "bg-purple-600",
+                ground: "bg-amber-500",
+                rock: "bg-yellow-700",
+                bug: "bg-lime-500",
+                ghost: "bg-purple-800",
+                steel: "bg-slate-400",
+                fire: "bg-red-600",
+                water: "bg-blue-400",
+                grass: "bg-green-500",
+                electric: "bg-yellow-400",
+                psychic: "bg-pink-500",
+                ice: "bg-cyan-300",
+                dragon: "bg-purple-700",
+                dark: "bg-gray-800",
+              };
+
+              return (
+                <div
+                  className={`${typeColorMap[array.type.name] || "bg-gray-400"} 
+                  px-4 py-1 rounded-full text-white shadow-sm ml-1`}
+                  key={key}
+                >
+                  <span className="capitalize">{array.type.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       {/* Pokemon Sprites */}
@@ -93,7 +133,7 @@ export default function PokemonInfoPage() {
       {/* Pokemon Emerald Sprites (fetching ruby-sapphire becausefor some reason emerald object does not contain the back_default as a property) */}
       <div className="flex flex-wrap justify-center">
         <PokemonSpriteContainer
-          text="Pokemon Emerald Sprites"
+          text="Emerald Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
               .back_default
@@ -105,7 +145,7 @@ export default function PokemonInfoPage() {
         />
 
         <PokemonSpriteContainer
-          text="Pokemon Emerald Shiny Sprites"
+          text="Emerald Shiny Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
               .back_shiny
@@ -120,7 +160,7 @@ export default function PokemonInfoPage() {
       {/* Pokemon FireRed / LeafGreen Sprites  */}
       <div className="flex flex-wrap justify-center">
         <PokemonSpriteContainer
-          text="Pokemon FireRed / LeafGreen Sprites"
+          text="FireRed / LeafGreen Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-iii"]["firered-leafgreen"]
               .front_default
@@ -132,7 +172,7 @@ export default function PokemonInfoPage() {
         />
 
         <PokemonSpriteContainer
-          text="Pokemon FR / LF Shiny Sprites"
+          text="FR / LF Shiny Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-iii"]["firered-leafgreen"]
               .back_shiny
@@ -147,7 +187,7 @@ export default function PokemonInfoPage() {
       {/* Pokemon Platinum Sprites (once again fetching from different versions (pearl/diamond) due to platinum object not having all the right properties)  */}
       <div className="flex flex-wrap justify-center">
         <PokemonSpriteContainer
-          text="Pokemon Platinum Sprites"
+          text="Platinum Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
               .back_default
@@ -159,7 +199,7 @@ export default function PokemonInfoPage() {
         />
 
         <PokemonSpriteContainer
-          text="Pokemon Platinum Shiny Sprites"
+          text="Platinum Shiny Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
               .back_shiny
@@ -174,7 +214,7 @@ export default function PokemonInfoPage() {
       {/* Pokemon HeartGold / SoulSilver Sprites */}
       <div className="flex flex-wrap justify-center">
         <PokemonSpriteContainer
-          text="Pokemon HeartGold / SoulSilver Sprites"
+          text="HeartGold / SoulSilver Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-iv"][
               "heartgold-soulsilver"
@@ -188,7 +228,7 @@ export default function PokemonInfoPage() {
         />
 
         <PokemonSpriteContainer
-          text="Pokemon HG / SS Shiny Sprites"
+          text="HG / SS Shiny Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-iv"][
               "heartgold-soulsilver"
@@ -205,7 +245,7 @@ export default function PokemonInfoPage() {
       {/* Pokemon Black & White Sprites */}
       <div className="flex flex-wrap justify-center">
         <PokemonSpriteContainer
-          text="Pokemon Black & White Sprites"
+          text="Black & White Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-v"]["black-white"]
               .back_default
@@ -217,7 +257,7 @@ export default function PokemonInfoPage() {
         />
 
         <PokemonSpriteContainer
-          text="Pokemon B&W Shiny Sprites"
+          text="B&W Shiny Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-v"]["black-white"]
               .back_shiny
@@ -231,13 +271,13 @@ export default function PokemonInfoPage() {
 
       {/* For some reason PokeAPI does not have 'back' sprites from this generation on, so I will be showing only the front and its shiny version */}
       <span className="mt-4 text-center">
-        Due to PokeAPI limitations, sprites from X/Y generation forward only
-        front sprites of Pokemon can be shown{" "}
+        Due to PokeAPI limitations, from X/Y generation forward only front
+        sprites of Pokemon can be shown{" "}
       </span>
       {/* Pokemon X & Y */}
       <div className="flex w-fit flex-wrap justify-center">
         <PokemonSpriteContainer
-          text="Pokemon X & Y Default and Shiny Sprites"
+          text="X & Y Default and Shiny Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-vi"]["x-y"].front_default
           }
@@ -248,7 +288,7 @@ export default function PokemonInfoPage() {
 
         {/* Pokemon OmegaRuby / AlphraSapphire Sprites */}
         <PokemonSpriteContainer
-          text="Pokemon OmegaRuby / AlphaSapphire Default and Shiny Sprites"
+          text="OmegaRuby / AlphaSapphire Default and Shiny Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-vi"][
               "omegaruby-alphasapphire"
@@ -263,7 +303,7 @@ export default function PokemonInfoPage() {
 
         {/* Pokemon Ultra-Sun / Ultra-Moon Sprites */}
         <PokemonSpriteContainer
-          text="Pokemon Ultra-Sun / Ultra-Moon Sprites"
+          text="Ultra-Sun / Ultra-Moon Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-vii"][
               "ultra-sun-ultra-moon"
