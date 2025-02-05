@@ -31,7 +31,7 @@ export default function PokemonInfoPage() {
     if (imgFront == null) {
       return (
         <div>
-          <div className="flex items-center flex-col w-fit mt-4">
+          <div className="flex items-center flex-col w-fit m-4">
             <span>{text}:</span>
             <div className="flex">
               <div className="w-60 h-30 bg-gray-100 rounded-lg flex justify-center items-center text-2xl text-center">
@@ -122,6 +122,13 @@ export default function PokemonInfoPage() {
               );
             })}
           </div>
+          <span>
+            Height{" "}
+            <span>
+              {pokemonData.height.toString().charAt(0)}m /{" "}
+              {(pokemonData.height.toString().charAt(0) * 3.28).toFixed(2)}ft
+            </span>
+          </span>
         </div>
       </div>
 
