@@ -63,6 +63,35 @@ export default function PokemonInfoPage() {
     );
   };
 
+  const PokemonBaseStatsTotal = () => {
+    // Calculating the total of all base_stat pokemon values
+    const totalStats = pokemonData.stats.reduce(
+      (acc, stats) => acc + stats.base_stat,
+      0
+    );
+
+    return (
+      <div>
+        {pokemonData.stats.map((stats, index) => (
+          <span
+            key={index}
+            className="border-b-1 pb-2 pt-2 flex justify-center items-center"
+          >
+            <span className="text-gray-400 capitalize">{stats.stat.name} </span>
+            <span className="ml-2 text-xl">{stats.base_stat}</span>
+          </span>
+        ))}
+
+        <div className="mt-4 text-lg text-gray-400">
+          Total Stats:{" "}
+          <span className="ml-1 text-2xl text-black font-bold">
+            {totalStats}
+          </span>
+        </div>
+      </div>
+    );
+  };
+
   if (!pokemonData) {
     return (
       <div className="flex flex-center justify-center items-center text-4xl mt-60">
@@ -76,7 +105,7 @@ export default function PokemonInfoPage() {
     <div className="flex flex-col items-center p-3">
       {/* Main Pokemon Image with its respective name */}
       <div className="flex flex-wrap justify-center">
-        <div className="w-80 h-80 flex flex-col items-center justify-center">
+        <div className="w-80 h-90 flex flex-col items-center justify-center">
           <h1 className="text-4xl capitalize">{params.PokemonName}</h1>
 
           <img
@@ -98,7 +127,7 @@ export default function PokemonInfoPage() {
             <img src={MusicNoteIcon} className="w-10 h-10" />
           </span>
         </div>
-        <div className="w-50 h-80 flex flex-col items-center justify-center">
+        <div className="w-50 h-90 flex flex-col items-center justify-center">
           <h6 className="text-3xl">Pokédex data</h6>
           <div className="border-b-1 w-full flex justify-center items-center">
             <span className="text-gray-400">National № </span>
@@ -180,6 +209,12 @@ export default function PokemonInfoPage() {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Pokemon base stats container */}
+        <div className="w-80 h-90 flex flex-col items-center justify-center">
+          <h1 className="text-3xl">Base stats</h1>
+          <PokemonBaseStatsTotal />
         </div>
       </div>
 
@@ -330,7 +365,7 @@ export default function PokemonInfoPage() {
 
       {/* For some reason PokeAPI does not have 'back' sprites from this generation on,
        so I will be showing only the front and its shiny version */}
-      <span className="mt-4 text-center text-xl underline">
+      <span className="mt-10 text-center text-xl underline">
         Due to PokeAPI limitations, from X/Y generation forward only front
         sprites of Pokemon can be shown{" "}
       </span>
