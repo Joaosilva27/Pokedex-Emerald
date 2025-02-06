@@ -74,7 +74,7 @@ export default function PokemonInfoPage() {
   return (
     <div className="flex flex-col items-center p-3">
       {/* Main Pokemon Image with its respective name */}
-      <div className="flex flex-wrap justify-center bg-gray-100 rounded-lg">
+      <div className="flex flex-wrap justify-center">
         <div className="w-80 h-80 flex flex-col items-center justify-center">
           <h1 className="text-4xl capitalize">{params.PokemonName}</h1>
 
@@ -84,11 +84,16 @@ export default function PokemonInfoPage() {
             alt={params.PokemonName}
           />
         </div>
-        <div className="w-80 h-80 bg-gray-100 rounded-lg flex flex-col items-center justify-center">
+        <div className="w-50 h-80 flex flex-col items-center justify-center">
           <h6 className="text-3xl">Pokédex data</h6>
-          <span>National № {pokemonData.id}</span>
-          <div className="flex">
+          <div className="border-b-1 w-full flex justify-center items-center">
+            <span className="text-gray-400">National № </span>
+            <span className="text-xl ml-1">{pokemonData.id}</span>
+          </div>
+          <div className="flex items-center justify-center border-b-1 mb-2 w-full p-2">
             {/* Fetch pokemon type and conditionally get bg color. It's a mess but it is what it is */}
+            <span className="text-gray-400 mr-1">Type</span>
+
             {pokemonData.types.map((array, key) => {
               const typeColorMap = {
                 normal: "bg-gray-400",
@@ -112,12 +117,16 @@ export default function PokemonInfoPage() {
               };
 
               return (
-                <div
-                  className={`${typeColorMap[array.type.name] || "bg-gray-400"} 
-                  px-4 py-1 rounded-full text-white shadow-sm ml-1`}
-                  key={key}
-                >
-                  <span className="capitalize">{array.type.name}</span>
+                <div>
+                  <div
+                    className={`${
+                      typeColorMap[array.type.name] || "bg-gray-400"
+                    } 
+                  px-4 py-1 rounded-full text-white text-xl shadow-sm ml-1`}
+                    key={key}
+                  >
+                    <span className="capitalize">{array.type.name}</span>
+                  </div>
                 </div>
               );
             })}
@@ -130,17 +139,33 @@ export default function PokemonInfoPage() {
             Added .toFixed(2) since calculation often returns way too many decimal digits.
             (e.g. Rayquaza's weight in lbs without .toFixed method is 45430000000001 kg, which is unnesseray since there is no need for precision)
           */}
-          <span>
-            Height{" "}
-            <span>
+          <span className="border-b-1 pb-2 w-full flex justify-center items-center">
+            <span className="text-gray-400">Height </span>
+            <span className="ml-1 text-xl">
               {pokemonData.height / 10}m /{" "}
               {((pokemonData.height / 10) * 3.28).toFixed(2)}ft
             </span>
           </span>
-          <span>
-            Weight <span>{pokemonData.weight / 10}</span>kg /{" "}
-            <span>{((pokemonData.weight / 10) * 2.2).toFixed(2)}</span>lbs
+          <span className="border-b-1 pb-2 pt-2 w-full flex justify-center items-center">
+            <span className="text-gray-400">Weight </span>
+            <span className="ml-1 text-xl">
+              {pokemonData.weight / 10}kg /{" "}
+              {((pokemonData.weight / 10) * 2.2).toFixed(2)}
+            </span>
+            lbs
           </span>
+
+          {/* Pokemon Special Abilities */}
+          <div className="flex items-center border-b-1 pb-1 w-full justify-center">
+            <span className="text-gray-400">Abilities</span>
+            <div className="flex flex-col text-xl">
+              {pokemonData.abilities.map((abilities, key) => (
+                <span key={key} className="capitalize ml-2">
+                  {abilities.ability.name}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
