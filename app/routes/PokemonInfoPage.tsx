@@ -170,9 +170,9 @@ export default function PokemonInfoPage() {
       </div>
 
       {/* Pokemon Sprites */}
-      <span className="mt-8">
-        <span className="capitalize text-center">{params.PokemonName}</span>'s
-        Sprites Throughout the different generations:
+      <span className="mt-8 text-2xl text-center">
+        <span className="capitalize">{params.PokemonName}</span>'s sprites
+        across the different generations:
       </span>
 
       {/* Pokemon Emerald Sprites (fetching ruby-sapphire becausefor some reason emerald object does not contain the back_default as a property) */}
@@ -314,8 +314,9 @@ export default function PokemonInfoPage() {
         />
       </div>
 
-      {/* For some reason PokeAPI does not have 'back' sprites from this generation on, so I will be showing only the front and its shiny version */}
-      <span className="mt-4 text-center">
+      {/* For some reason PokeAPI does not have 'back' sprites from this generation on,
+       so I will be showing only the front and its shiny version */}
+      <span className="mt-4 text-center text-xl underline">
         Due to PokeAPI limitations, from X/Y generation forward only front
         sprites of Pokemon can be shown{" "}
       </span>
