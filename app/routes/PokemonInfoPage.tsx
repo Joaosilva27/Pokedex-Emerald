@@ -122,12 +122,24 @@ export default function PokemonInfoPage() {
               );
             })}
           </div>
+
+          {/* Height and Weight calculation
+            I divided both height and weight by 10 due to the api returning the kg result * 10
+             (e.g. Rayquaza's height is 7meters but it returns 70).
+
+            Added .toFixed(2) since calculation often returns way too many decimal digits.
+            (e.g. Rayquaza's weight in lbs without .toFixed method is 45430000000001 kg, which is unnesseray since there is no need for precision)
+          */}
           <span>
             Height{" "}
             <span>
-              {pokemonData.height.toString().charAt(0)}m /{" "}
-              {(pokemonData.height.toString().charAt(0) * 3.28).toFixed(2)}ft
+              {pokemonData.height / 10}m /{" "}
+              {((pokemonData.height / 10) * 3.28).toFixed(2)}ft
             </span>
+          </span>
+          <span>
+            Weight <span>{pokemonData.weight / 10}</span>kg /{" "}
+            <span>{((pokemonData.weight / 10) * 2.2).toFixed(2)}</span>lbs
           </span>
         </div>
       </div>
