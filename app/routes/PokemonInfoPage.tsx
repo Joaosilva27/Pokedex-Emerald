@@ -7,6 +7,7 @@ import MusicNoteIcon from "~/icons/note.png";
 export default function PokemonInfoPage() {
   const params = useParams();
   const [pokemonData, setPokemonData] = useState<any | null>(null);
+  const [pokedexEntries, setPokedexEntries] = useState<any | null>(null);
 
   useEffect(() => {
     axios
@@ -18,6 +19,14 @@ export default function PokemonInfoPage() {
         setPokemonData(data);
 
         console.log(data);
+
+        return axios.get(
+          `https://pokeapi.co/api/v2/pokemon-species/${data.id}`
+        );
+      })
+      .then((res) => {
+        setPokedexEntries(res.data);
+        console.log(res.data);
       })
 
       .catch((err) => {
@@ -88,6 +97,15 @@ export default function PokemonInfoPage() {
             {totalStats}
           </span>
         </div>
+      </div>
+    );
+  };
+
+  const PokedexEntriesContainer = ({ pokemonGameName, entryText }) => {
+    return (
+      <div>
+        <span>{pokemonGameName}</span>
+        <span>{entryText}</span>
       </div>
     );
   };
@@ -219,197 +237,229 @@ export default function PokemonInfoPage() {
       </div>
 
       {/* Pokemon Sprites */}
-      <span className="mt-8 text-2xl text-center">
-        <span className="capitalize">{params.PokemonName}</span>'s sprites
-        across the different generations:
-      </span>
-
-      {/* Pokemon Emerald Sprites (fetching ruby-sapphire becausefor some reason emerald object does not contain the back_default as a property) */}
       <div className="flex flex-wrap justify-center">
-        <PokemonSpriteContainer
-          text="Emerald Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
-              .back_default
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
-              .front_default
-          }
-        />
+        <div className="text-center mt-8">
+          <span className="text-2xl">
+            <span className="capitalize">{params.PokemonName}</span>'s sprites
+            across the different generations:
+          </span>
 
-        <PokemonSpriteContainer
-          text="Emerald Shiny Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
-              .back_shiny
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
-              .front_shiny
-          }
-        />
-      </div>
+          {/* Pokemon Emerald Sprites (fetching ruby-sapphire becausefor some reason emerald object does not contain the back_default as a property) */}
+          <div className="flex flex-wrap justify-center">
+            <PokemonSpriteContainer
+              text="Emerald Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
+                  .back_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
+                  .front_default
+              }
+            />
 
-      {/* Pokemon FireRed / LeafGreen Sprites  */}
-      <div className="flex flex-wrap justify-center">
-        <PokemonSpriteContainer
-          text="FireRed / LeafGreen Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-iii"]["firered-leafgreen"]
-              .back_default
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-iii"]["firered-leafgreen"]
-              .front_default
-          }
-        />
+            <PokemonSpriteContainer
+              text="Emerald Shiny Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
+                  .back_shiny
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
+                  .front_shiny
+              }
+            />
+          </div>
 
-        <PokemonSpriteContainer
-          text="FR / LF Shiny Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-iii"]["firered-leafgreen"]
-              .back_shiny
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-iii"]["firered-leafgreen"]
-              .front_shiny
-          }
-        />
-      </div>
+          {/* Pokemon FireRed / LeafGreen Sprites  */}
+          <div className="flex flex-wrap justify-center">
+            <PokemonSpriteContainer
+              text="FireRed / LeafGreen Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-iii"][
+                  "firered-leafgreen"
+                ].back_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-iii"][
+                  "firered-leafgreen"
+                ].front_default
+              }
+            />
 
-      {/* Pokemon Platinum Sprites (once again fetching from different versions (pearl/diamond) due to platinum object not having all the right properties)  */}
-      <div className="flex flex-wrap justify-center">
-        <PokemonSpriteContainer
-          text="Platinum Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
-              .back_default
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
-              .front_default
-          }
-        />
+            <PokemonSpriteContainer
+              text="FR / LF Shiny Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-iii"][
+                  "firered-leafgreen"
+                ].back_shiny
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-iii"][
+                  "firered-leafgreen"
+                ].front_shiny
+              }
+            />
+          </div>
 
-        <PokemonSpriteContainer
-          text="Platinum Shiny Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
-              .back_shiny
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
-              .front_shiny
-          }
-        />
-      </div>
+          {/* Pokemon Platinum Sprites (once again fetching from different versions (pearl/diamond) due to platinum object not having all the right properties)  */}
+          <div className="flex flex-wrap justify-center">
+            <PokemonSpriteContainer
+              text="Platinum Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
+                  .back_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
+                  .front_default
+              }
+            />
 
-      {/* Pokemon HeartGold / SoulSilver Sprites */}
-      <div className="flex flex-wrap justify-center">
-        <PokemonSpriteContainer
-          text="HeartGold / SoulSilver Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-iv"][
-              "heartgold-soulsilver"
-            ].back_default
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-iv"][
-              "heartgold-soulsilver"
-            ].front_default
-          }
-        />
+            <PokemonSpriteContainer
+              text="Platinum Shiny Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
+                  .back_shiny
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
+                  .front_shiny
+              }
+            />
+          </div>
 
-        <PokemonSpriteContainer
-          text="HG / SS Shiny Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-iv"][
-              "heartgold-soulsilver"
-            ].back_shiny
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-iv"][
-              "heartgold-soulsilver"
-            ].front_shiny
-          }
-        />
-      </div>
+          {/* Pokemon HeartGold / SoulSilver Sprites */}
+          <div className="flex flex-wrap justify-center">
+            <PokemonSpriteContainer
+              text="HeartGold / SoulSilver Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-iv"][
+                  "heartgold-soulsilver"
+                ].back_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-iv"][
+                  "heartgold-soulsilver"
+                ].front_default
+              }
+            />
 
-      {/* Pokemon Black & White Sprites */}
-      <div className="flex flex-wrap justify-center">
-        <PokemonSpriteContainer
-          text="Black & White Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-v"]["black-white"]
-              .back_default
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-v"]["black-white"]
-              .front_default
-          }
-        />
+            <PokemonSpriteContainer
+              text="HG / SS Shiny Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-iv"][
+                  "heartgold-soulsilver"
+                ].back_shiny
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-iv"][
+                  "heartgold-soulsilver"
+                ].front_shiny
+              }
+            />
+          </div>
 
-        <PokemonSpriteContainer
-          text="B&W Shiny Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-v"]["black-white"]
-              .back_shiny
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-v"]["black-white"]
-              .front_shiny
-          }
-        />
-      </div>
+          {/* Pokemon Black & White Sprites */}
+          <div className="flex flex-wrap justify-center">
+            <PokemonSpriteContainer
+              text="Black & White Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-v"]["black-white"]
+                  .back_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-v"]["black-white"]
+                  .front_default
+              }
+            />
 
-      {/* For some reason PokeAPI does not have 'back' sprites from this generation on,
+            <PokemonSpriteContainer
+              text="B&W Shiny Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-v"]["black-white"]
+                  .back_shiny
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-v"]["black-white"]
+                  .front_shiny
+              }
+            />
+          </div>
+
+          {/* For some reason PokeAPI does not have 'back' sprites from this generation on,
        so I will be showing only the front and its shiny version */}
-      <span className="mt-10 text-center text-xl underline">
-        Due to PokeAPI limitations, from X/Y generation forward only front
-        sprites of Pokemon can be shown{" "}
-      </span>
-      {/* Pokemon X & Y */}
-      <div className="flex w-fit flex-wrap justify-center">
-        <PokemonSpriteContainer
-          text="X & Y Default and Shiny Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-vi"]["x-y"].front_default
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-vi"]["x-y"].front_shiny
-          }
-        />
 
-        {/* Pokemon OmegaRuby / AlphraSapphire Sprites */}
-        <PokemonSpriteContainer
-          text="OmegaRuby / AlphaSapphire Default and Shiny Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-vi"][
-              "omegaruby-alphasapphire"
-            ].front_default
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-vi"][
-              "omegaruby-alphasapphire"
-            ].front_shiny
-          }
-        />
+          {/* Pokemon X & Y */}
+          <div className="flex w-160 flex-wrap justify-center mt-10">
+            <span className=" text-center text-xl underline">
+              Due to PokeAPI limitations, from X/Y generation forward only front
+              sprites of Pokemon can be shown{" "}
+            </span>
+            <PokemonSpriteContainer
+              text="X & Y Default and Shiny Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-vi"]["x-y"]
+                  .front_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-vi"]["x-y"].front_shiny
+              }
+            />
 
-        {/* Pokemon Ultra-Sun / Ultra-Moon Sprites */}
-        <PokemonSpriteContainer
-          text="Ultra-Sun / Ultra-Moon Sprites"
-          imgBack={
-            pokemonData.sprites.versions["generation-vii"][
-              "ultra-sun-ultra-moon"
-            ].front_default
-          }
-          imgFront={
-            pokemonData.sprites.versions["generation-vii"][
-              "ultra-sun-ultra-moon"
-            ].front_shiny
-          }
-        />
+            {/* Pokemon OmegaRuby / AlphraSapphire Sprites */}
+            <PokemonSpriteContainer
+              text="OmegaRuby / AlphaSapphire Default and Shiny Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-vi"][
+                  "omegaruby-alphasapphire"
+                ].front_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-vi"][
+                  "omegaruby-alphasapphire"
+                ].front_shiny
+              }
+            />
+
+            {/* Pokemon Ultra-Sun / Ultra-Moon Sprites */}
+            <PokemonSpriteContainer
+              text="Ultra-Sun / Ultra-Moon Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-vii"][
+                  "ultra-sun-ultra-moon"
+                ].front_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-vii"][
+                  "ultra-sun-ultra-moon"
+                ].front_shiny
+              }
+            />
+          </div>
+        </div>
+        <div className="flex justify-center text-center mt-8">
+          <div className="text-2xl capitalize">
+            <span>{params.PokemonName}</span>'s sprites across the different
+            generations:
+          </div>
+          {pokedexEntries ? (
+            <div>
+              {pokedexEntries.flavor_text_entries
+                .slice(0, 16)
+                .filter((array) => array.flavor_text.charAt(0) !== "S") {/* for some reason two texts (12, 14) were in french and both started with the word 'Ses' so this is a funny fucking way to remove them lmao */}
+                .map((array, key) => (
+                  <PokedexEntriesContainer
+                    key={key}
+                    pokemonGameName={array.version.name}
+                    entryText={array.flavor_text}
+                  />
+                ))}
+            </div>
+          ) : (
+            <div>Loading Entries...</div>
+          )}
+        </div>
       </div>
     </div>
   );
