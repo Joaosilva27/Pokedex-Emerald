@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import PokeballLoadingIcon from "~/icons/pokeball.png";
+import MusicNoteIcon from "~/icons/note.png";
 
 export default function PokemonInfoPage() {
   const params = useParams();
@@ -83,6 +84,19 @@ export default function PokemonInfoPage() {
             src={`https://img.pokemondb.net/artwork/${params.PokemonName}.jpg`}
             alt={params.PokemonName}
           />
+
+          {/* Play the pokemon's cry */}
+          <span
+            className="capitalize flex items-center text-xl underline cursor-pointer"
+            onClick={() => {
+              const pokemonSoundUrl = pokemonData.cries.legacy;
+              const playSound = new Audio(pokemonSoundUrl);
+              playSound.play();
+            }}
+          >
+            {params.PokemonName}'s cry{" "}
+            <img src={MusicNoteIcon} className="w-10 h-10" />
+          </span>
         </div>
         <div className="w-50 h-80 flex flex-col items-center justify-center">
           <h6 className="text-3xl">Pokédex data</h6>
@@ -208,11 +222,11 @@ export default function PokemonInfoPage() {
           text="FireRed / LeafGreen Sprites"
           imgBack={
             pokemonData.sprites.versions["generation-iii"]["firered-leafgreen"]
-              .front_default
+              .back_default
           }
           imgFront={
             pokemonData.sprites.versions["generation-iii"]["firered-leafgreen"]
-              .back_default
+              .front_default
           }
         />
 
