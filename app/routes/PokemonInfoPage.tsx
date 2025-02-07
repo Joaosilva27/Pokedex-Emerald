@@ -102,11 +102,55 @@ export default function PokemonInfoPage() {
   };
 
   const PokedexEntriesContainer = ({ pokemonGameName, entryText }) => {
+    const gameNameColor = {
+      red: "text-red-500",
+      blue: "text-blue-500",
+      yellow: "text-yellow-200",
+      gold: "text-yellow-500",
+      silver: "text-gray-400",
+      crystal: "text-purple-500",
+      ruby: "text-red-600",
+      sapphire: "text-blue-600",
+      emerald: "text-green-500",
+      firered: "text-orange-600",
+      leafgreen: "text-green-700",
+      diamond: "text-blue-400",
+      pearl: "text-pink-400",
+      platinum: "text-blue-900",
+      heartgold: "text-yellow-500",
+      soulsilver: "text-gray-700",
+      black: "text-gray-900",
+      white: "text-gray-300",
+      "black-2": "text-gray-900",
+      "white-2": "text-gray-300",
+      x: "text-indigo-600",
+      y: "text-yellow-600",
+      "omega-ruby": "text-red-500",
+      "alpha-sapphire": "text-blue-500",
+      sun: "text-yellow-400",
+      "ultra-sun": "text-yellow-600",
+      moon: "text-blue-200",
+      "ultra-moon": "text-blue-400",
+      sword: "text-blue-900",
+      shield: "text-red-900",
+      "lets-go-pikachu": "text-yellow-300",
+      "lets-go-eevee": "text-orange-950",
+      "legends-arceus": "text-blue-900",
+    };
+
+    console.log("Color Class:", gameNameColor[pokemonGameName]);
+
     return (
-      <div className="flex flex-wrap items-center border-1 w-full">
+      <div className="flex flex-wrap items-center border-2 border-gray-200 w-full">
         <div className="flex items-center p-4 flex-wrap">
-          <span className="capitalize mr-4">{pokemonGameName}</span>
-          <span>{entryText}</span>
+          <span
+            className={`capitalize text-xl mr-4 ${
+              gameNameColor[pokemonGameName] || "text-black"
+            }`}
+          >
+            {pokemonGameName}
+          </span>
+          <span className="text-lg">{entryText}</span>
         </div>
       </div>
     );
