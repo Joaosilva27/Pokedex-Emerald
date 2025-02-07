@@ -103,9 +103,11 @@ export default function PokemonInfoPage() {
 
   const PokedexEntriesContainer = ({ pokemonGameName, entryText }) => {
     return (
-      <div>
-        <span>{pokemonGameName}</span>
-        <span>{entryText}</span>
+      <div className="flex flex-wrap items-center border-1 w-full">
+        <div className="flex items-center p-4 flex-wrap">
+          <span className="capitalize mr-4">{pokemonGameName}</span>
+          <span>{entryText}</span>
+        </div>
       </div>
     );
   };
@@ -237,8 +239,8 @@ export default function PokemonInfoPage() {
       </div>
 
       {/* Pokemon Sprites */}
-      <div className="flex flex-wrap justify-center">
-        <div className="text-center mt-8">
+      <div className="flex justify-center flex-wrap">
+        <div className="text-center mt-8 mr-10">
           <span className="text-2xl">
             <span className="capitalize">{params.PokemonName}</span>'s sprites
             across the different generations:
@@ -391,37 +393,41 @@ export default function PokemonInfoPage() {
        so I will be showing only the front and its shiny version */}
 
           {/* Pokemon X & Y */}
-          <div className="flex w-160 flex-wrap justify-center mt-10">
+          <div className=" flex flex-col justify-center mt-10">
             <span className=" text-center text-xl underline">
               Due to PokeAPI limitations, from X/Y generation forward only front
               sprites of Pokemon can be shown{" "}
             </span>
-            <PokemonSpriteContainer
-              text="X & Y Default and Shiny Sprites"
-              imgBack={
-                pokemonData.sprites.versions["generation-vi"]["x-y"]
-                  .front_default
-              }
-              imgFront={
-                pokemonData.sprites.versions["generation-vi"]["x-y"].front_shiny
-              }
-            />
+            <div className="flex flex-wrap justify-center">
+              <PokemonSpriteContainer
+                text="X & Y Default and Shiny Sprites"
+                imgBack={
+                  pokemonData.sprites.versions["generation-vi"]["x-y"]
+                    .front_default
+                }
+                imgFront={
+                  pokemonData.sprites.versions["generation-vi"]["x-y"]
+                    .front_shiny
+                }
+              />
 
-            {/* Pokemon OmegaRuby / AlphraSapphire Sprites */}
-            <PokemonSpriteContainer
-              text="OmegaRuby / AlphaSapphire Default and Shiny Sprites"
-              imgBack={
-                pokemonData.sprites.versions["generation-vi"][
-                  "omegaruby-alphasapphire"
-                ].front_default
-              }
-              imgFront={
-                pokemonData.sprites.versions["generation-vi"][
-                  "omegaruby-alphasapphire"
-                ].front_shiny
-              }
-            />
-
+              {/* Pokemon OmegaRuby / AlphraSapphire Sprites */}
+              <PokemonSpriteContainer
+                text="OmegaRuby / AlphaSapphire Default and Shiny Sprites"
+                imgBack={
+                  pokemonData.sprites.versions["generation-vi"][
+                    "omegaruby-alphasapphire"
+                  ].front_default
+                }
+                imgFront={
+                  pokemonData.sprites.versions["generation-vi"][
+                    "omegaruby-alphasapphire"
+                  ].front_shiny
+                }
+              />
+            </div>
+          </div>
+          <div className="flex justify-center">
             {/* Pokemon Ultra-Sun / Ultra-Moon Sprites */}
             <PokemonSpriteContainer
               text="Ultra-Sun / Ultra-Moon Sprites"
@@ -438,16 +444,15 @@ export default function PokemonInfoPage() {
             />
           </div>
         </div>
-        <div className="flex justify-center text-center mt-8">
+        <div className="flex justify-center text-center mt-8 flex-wrap max-w-150">
           <div className="text-2xl capitalize">
-            <span>{params.PokemonName}</span>'s sprites across the different
-            generations:
+            <span>{params.PokemonName}</span>'s Pokédex entries across the
+            different generations:
           </div>
           {pokedexEntries ? (
-            <div>
+            <div className="flex flex-col items-start">
               {pokedexEntries.flavor_text_entries
-                .slice(0, 16)
-                .filter((array) => array.flavor_text.charAt(0) !== "S") {/* for some reason two texts (12, 14) were in french and both started with the word 'Ses' so this is a funny fucking way to remove them lmao */}
+                .filter((lang) => lang.language.name == "en") // filtering for english pokedex entries... i did not see the objects had a language property last commit, my bad
                 .map((array, key) => (
                   <PokedexEntriesContainer
                     key={key}
