@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import PokeballLoadingIcon from "~/icons/pokeball.png";
@@ -141,7 +141,7 @@ export default function PokemonInfoPage() {
     console.log("Color Class:", gameNameColor[pokemonGameName]);
 
     return (
-      <div className="flex flex-wrap items-center border-2 border-gray-200 w-full">
+      <div className="flex flex-wrap items-center bg-gray-100 mt-2 w-full">
         <div className="flex items-center p-4 flex-wrap">
           <span
             className={`capitalize text-xl mr-4 ${
@@ -188,10 +188,12 @@ export default function PokemonInfoPage() {
             }}
           >
             {params.PokemonName}'s cry{" "}
-            <img
-              src={`https://github.com/msikma/pokesprite/blob/master/icons/pokemon/regular/${params.PokemonName}.png?raw=true`}
-              className="w-fit h-10 animate-bounce animate-infinite"
-            />
+            <Suspense fallback="loading">
+              <img
+                src={`https://github.com/msikma/pokesprite/blob/master/icons/pokemon/regular/${params.PokemonName}.png?raw=true`}
+                className="w-fit h-10 animate-bounce animate-infinite"
+              />
+            </Suspense>
           </span>
         </div>
         <div className="w-50 h-90 ml-10 flex flex-col items-center justify-center">
@@ -491,15 +493,17 @@ export default function PokemonInfoPage() {
             />
           </div>
         </div>
+
+        {/* Pokedex entries in english */}
         <div className="flex justify-center text-center mt-8 flex-wrap max-w-150">
           <div className="text-2xl capitalize">
             <span>{params.PokemonName}</span>'s Pokédex entries across the
             different generations:
           </div>
           {pokedexEntries ? (
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start mt-4">
               {pokedexEntries.flavor_text_entries
-                .filter((lang) => lang.language.name == "en") // filtering for english pokedex entries... i did not see the objects had a language property last commit, my bad
+                .filter((lang) => lang.language.name == "en") // filtering for english pokedex entries...
                 .map((array, key) => (
                   <PokedexEntriesContainer
                     key={key}
