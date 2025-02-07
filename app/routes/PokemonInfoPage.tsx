@@ -195,7 +195,7 @@ export default function PokemonInfoPage() {
             <img src={MusicNoteIcon} className="w-10 h-10" />
           </span>
         </div>
-        <div className="w-50 h-90 flex flex-col items-center justify-center">
+        <div className="w-50 h-90 ml-10 flex flex-col items-center justify-center">
           <h6 className="text-3xl">Pokédex data</h6>
           <div className="border-b-1 w-full flex justify-center items-center">
             <span className="text-gray-400">National № </span>
