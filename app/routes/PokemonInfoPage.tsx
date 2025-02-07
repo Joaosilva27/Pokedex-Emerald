@@ -187,6 +187,10 @@ export default function PokemonInfoPage() {
               playSound.play();
             }}
           >
+            <img
+              src={`https://github.com/msikma/pokesprite/blob/master/icons/pokemon/regular/${params.PokemonName}.png?raw=true`}
+              className="w-fit h-10"
+            />
             {params.PokemonName}'s cry{" "}
             <img src={MusicNoteIcon} className="w-10 h-10" />
           </span>
