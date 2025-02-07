@@ -8,6 +8,9 @@ export default function PokemonInfoPage() {
   const params = useParams();
   const [pokemonData, setPokemonData] = useState<any | null>(null);
   const [pokedexEntries, setPokedexEntries] = useState<any | null>(null);
+  const [pokemonEvolutionLine, setPokemonEvolutionLine] = useState<any | null>(
+    null
+  );
 
   useEffect(() => {
     axios
@@ -26,6 +29,12 @@ export default function PokemonInfoPage() {
       })
       .then((res) => {
         setPokedexEntries(res.data);
+        console.log(res.data);
+
+        return axios.get(res.data.evolution_chain.url);
+      })
+      .then((res) => {
+        setPokemonEvolutionLine(res.data);
         console.log(res.data);
       })
 
@@ -138,8 +147,6 @@ export default function PokemonInfoPage() {
       "legends-arceus": "text-blue-900",
     };
 
-    console.log("Color Class:", gameNameColor[pokemonGameName]);
-
     return (
       <div className="flex flex-wrap items-center bg-gray-100 mt-2 w-full">
         <div className="flex items-center p-4 flex-wrap">
@@ -153,6 +160,44 @@ export default function PokemonInfoPage() {
           <span className="text-lg">{entryText}</span>
         </div>
       </div>
+    );
+  };
+
+  const PokemonEvolutionLineContainer = () => {
+    return (
+      <>
+        {pokemonEvolutionLine.chain.species.name != null &&
+        pokemonEvolutionLine.chain.evolves_to[0]?.species?.name == null ? (
+          <div>
+            <span className="capitalize">{params.PokemonName}&nbsp;</span>
+            <span>
+              does not have regular evolutions in any of the Pokémon games
+              (ignoring Mega Evolutions).
+            </span>
+          </div>
+        ) : (
+          pokemonEvolutionLine.chain.evolves_to[0]?.species?.name != null && (
+            <div>
+              <img // fetching the 2nd pokemon in evolution line
+                src={`https://img.pokemondb.net/artwork/${pokemonEvolutionLine.chain.species.name}.jpg`}
+                className="h-20 w-20 object-contain"
+              />
+              <img // fetching the 2nd pokemon in evolution line
+                src={`https://img.pokemondb.net/artwork/${pokemonEvolutionLine.chain.evolves_to[0].species.name}.jpg`}
+                className="h-20 w-20 object-contain"
+              />
+            </div>
+          )
+        )}
+
+        {pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]?.species
+          ?.name != null && (
+          <img // fetching the 3rd pokemon in evolution line
+            src={`https://img.pokemondb.net/artwork/${pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0].species.name}.jpg`}
+            className="h-20 w-20 object-contain"
+          />
+        )}
+      </>
     );
   };
 
@@ -284,6 +329,12 @@ export default function PokemonInfoPage() {
         <div className="w-80 h-90 flex flex-col items-center justify-center">
           <h1 className="text-3xl">Base stats</h1>
           <PokemonBaseStatsTotal />
+        </div>
+
+        {/* Pokemon evolution line */}
+        <div className="w-80 h-90 flex flex-col items-center justify-center">
+          <h1 className="text-3xl">Evolution line</h1>
+          {pokemonEvolutionLine != null && <PokemonEvolutionLineContainer />}
         </div>
       </div>
 
