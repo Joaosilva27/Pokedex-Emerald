@@ -192,8 +192,8 @@ export default function PokemonInfoPage() {
 
               <div className="flex flex-col items-center">
                 <span>
-                  {pokemonEvolutionLine.chain.evolves_to[0].evolution_details[0]
-                    .min_level != null ? (
+                  {pokemonEvolutionLine.chain.evolves_to[0] // The monstrosity from here below is due to my lazyness but I'm too burned out to fix it. 08/02/2025
+                    ?.evolution_details[0]?.min_level != null ? (
                     <span>
                       (Level&nbsp;
                       {
@@ -203,30 +203,36 @@ export default function PokemonInfoPage() {
                       )
                     </span>
                   ) : pokemonEvolutionLine.baby_trigger_item != null ? (
-                    <span>({pokemonEvolutionLine.baby_trigger_item.name}</span>
+                    <span>({pokemonEvolutionLine.baby_trigger_item.name})</span>
                   ) : pokemonEvolutionLine.chain.evolves_to[0]
-                      .evolution_details[0].held_item.name != null ? (
+                      ?.evolution_details[0]?.held_item?.name != null ? (
                     <span className="capitalize">
+                      (
                       {
                         pokemonEvolutionLine.chain.evolves_to[0]
                           .evolution_details[0].held_item.name
                       }
-                    </span>
-                  ) : pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
-                      .evolution_details[0].item.name != null ? (
-                    <span className="capitalize">
-                      {
-                        pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
-                          .evolution_details[0].item.name
-                      }
+                      )
                     </span>
                   ) : pokemonEvolutionLine.chain.evolves_to[0]
-                      .evolution_details[0].trigger.name != null ? (
-                    <div className="capitalize">
+                      ?.evolution_details[0]?.item?.name != null ? (
+                    <span className="capitalize">
+                      (
                       {
                         pokemonEvolutionLine.chain.evolves_to[0]
-                          .evolution_details[0].trigger.name
+                          .evolution_details[0].item.name
                       }
+                      )
+                    </span>
+                  ) : pokemonEvolutionLine.chain.evolves_to[0]
+                      ?.evolution_details[0]?.min_happiness != null ? (
+                    <div className="capitalize">
+                      (<span>Reach minimum happiness</span>&nbsp;
+                      {
+                        pokemonEvolutionLine.chain.evolves_to[0]
+                          .evolution_details[0].min_happiness
+                      }
+                      )
                     </div>
                   ) : (
                     <div></div>
@@ -253,24 +259,28 @@ export default function PokemonInfoPage() {
           <div className="flex items-center">
             <div className="flex flex-col items-center">
               <span>
-                {pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
-                  .evolution_details[0].item != null ? (
+                {pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]
+                  ?.evolution_details[0]?.item != null ? (
                   <span className="capitalize">
+                    (
                     {
                       pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
                         .evolution_details[0].item.name
                     }
+                    )
                   </span>
-                ) : pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
-                    .evolution_details[0].held_item != null ? (
+                ) : pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]
+                    ?.evolution_details[0]?.held_item != null ? (
                   <span className="capitalize">
+                    (
                     {
                       pokemonEvolutionLine.chain.evolves_to[0]
                         .evolution_details[0].held_item.name
                     }
+                    )
                   </span>
-                ) : pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
-                    .evolution_details[0].min_level != null ? (
+                ) : pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]
+                    ?.evolution_details[0]?.min_level != null ? (
                   <span>
                     (Level&nbsp;
                     {
@@ -280,17 +290,19 @@ export default function PokemonInfoPage() {
                     )
                   </span>
                 ) : pokemonEvolutionLine.baby_trigger_item != null ? (
-                  <span>({pokemonEvolutionLine.baby_trigger_item.name}</span>
-                ) : pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
-                    .evolution_details[0].trigger.name != null ? (
+                  <span>({pokemonEvolutionLine.baby_trigger_item.name})</span>
+                ) : pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]
+                    ?.evolution_details[0]?.trigger.name != null ? (
                   <div className="capitalize">
+                    (
                     {
                       pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
                         .evolution_details[0].trigger.name
                     }
+                    )
                   </div>
                 ) : (
-                  <div></div>
+                  <div>This pokemon cannot evolve dumbass</div>
                 )}
               </span>
               <img src={PokemonEvolutionLineArrowIcon} className="w-10 h-5" />
