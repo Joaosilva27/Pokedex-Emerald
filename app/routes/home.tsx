@@ -35,6 +35,44 @@ export default function Home() {
       });
   }, []);
 
+  const DeoxysContainer = () => {
+    return (
+      <div className="flex">
+        <Link to={`/deoxys-normal`}>
+          <PokemonContainer
+            pokemonId={202}
+            pokemonName="Deoxys-Normal"
+            pokemonImg={`https://img.pokemondb.net/artwork/deoxys.jpg`}
+          />
+        </Link>
+
+        <Link to={`/deoxys-attack`}>
+          <PokemonContainer
+            pokemonId={203}
+            pokemonName="Deoxys-ATK"
+            pokemonImg={`https://img.pokemondb.net/artwork/deoxys-attack.jpg`}
+          />
+        </Link>
+
+        <Link to={`/deoxys-defense`}>
+          <PokemonContainer
+            pokemonId={204}
+            pokemonName="Deoxys-DEF"
+            pokemonImg={`https://img.pokemondb.net/artwork/deoxys-defense.jpg`}
+          />
+        </Link>
+
+        <Link to={`/deoxys-speed`}>
+          <PokemonContainer
+            pokemonId={205}
+            pokemonName="Deoxys-SPD"
+            pokemonImg={`https://img.pokemondb.net/artwork/deoxys-speed.jpg`}
+          />
+        </Link>
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col justify-center items-center">
       <Header />
@@ -48,16 +86,19 @@ export default function Home() {
         </div>
       ) : (
         <div className="flex flex-row justify-center flex-wrap p-10 pt-2">
-          {pokemonData.map((data, index) => (
-            <Link to={`/${data.pokemon_species.name}`}>
-              <PokemonContainer
-                key={index}
-                pokemonId={data.entry_number}
-                pokemonName={data.pokemon_species.name}
-                pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
-              />
-            </Link>
+          {pokemonData.slice(0, 201).map((data, index) => (
+            <>
+              <Link to={`/${data.pokemon_species.name}`}>
+                <PokemonContainer
+                  key={index}
+                  pokemonId={data.entry_number}
+                  pokemonName={data.pokemon_species.name}
+                  pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
+                />
+              </Link>
+            </>
           ))}
+          <DeoxysContainer />
         </div>
       )}
     </div>

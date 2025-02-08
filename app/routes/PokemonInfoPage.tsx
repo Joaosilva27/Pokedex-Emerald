@@ -53,10 +53,11 @@ export default function PokemonInfoPage() {
           <div className="flex items-center flex-col w-fit m-4">
             <span>{text}:</span>
             <div className="flex">
-              <div className="w-60 h-30 bg-gray-100 rounded-lg flex justify-center items-center text-2xl text-center">
+              <div className="w-60 h-30 bg-gray-100 rounded-lg flex justify-center items-center text-xl text-center">
                 <span>
                   <span className="capitalize">{params.PokemonName}</span> does
-                  not appear in this game.
+                  not appear in this game or there is no image from PokeAPI
+                  database.
                 </span>
               </div>
             </div>
@@ -283,12 +284,13 @@ export default function PokemonInfoPage() {
             }}
           >
             {params.PokemonName}'s cry{" "}
-            <Suspense fallback="loading">
-              <img
-                src={`https://github.com/msikma/pokesprite/blob/master/icons/pokemon/regular/${params.PokemonName}.png?raw=true`}
-                className="w-fit h-10 animate-bounce animate-infinite"
-              />
-            </Suspense>
+            <img
+              src={`https://github.com/msikma/pokesprite/blob/master/icons/pokemon/regular/${params.PokemonName}.png?raw=true`}
+              className="w-fit h-10 animate-bounce animate-infinite"
+              onError={(e) => {
+                e.target.style.display = "none";
+              }}
+            />
           </span>
         </div>
         <div className="w-50 h-90 flex flex-col items-center justify-center">
@@ -614,7 +616,10 @@ export default function PokemonInfoPage() {
                 ))}
             </div>
           ) : (
-            <div>Loading Entries...</div>
+            <div>
+              PokeAPI does not have any pokedex entries. If the Pokémon you are
+              viewing has a normal-form, please check its page instead.
+            </div>
           )}
         </div>
       </div>
