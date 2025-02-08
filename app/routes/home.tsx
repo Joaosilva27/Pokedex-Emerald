@@ -47,7 +47,7 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-row flex-wrap p-10 pt-2">
+        <div className="flex flex-row justify-center flex-wrap p-10 pt-2">
           {pokemonData.map((data, index) => (
             <Link to={`/${data.pokemon_species.name}`}>
               <PokemonContainer
