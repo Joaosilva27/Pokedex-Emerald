@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useParams } from "react-router";
 import axios from "axios";
 import PokeballLoadingIcon from "~/icons/pokeball.png";
+import HomeIcon from "~/icons/home.png";
 import PokemonEvolutionLineArrowIcon from "~/icons/arrow.png";
 
 export default function PokemonInfoPage() {
@@ -375,7 +376,15 @@ export default function PokemonInfoPage() {
       {/* Main Pokemon Image with its respective name */}
       <div className="flex flex-wrap justify-center">
         <div className="w-80 h-90 flex flex-col items-center justify-center">
-          <h1 className="text-4xl capitalize">{params.PokemonName}</h1>
+          <div className="flex items-center justify-center">
+            <div className="absolute flex flex-col">
+              <Link to="/">
+                <img src={HomeIcon} className="w-5 h-5 relative right-40" />
+                <span className="relative right-40">Back</span>
+              </Link>
+            </div>
+            <h1 className="text-4xl capitalize">{params.PokemonName}</h1>
+          </div>
 
           <img
             className="w-full h-full object-contain p-4"

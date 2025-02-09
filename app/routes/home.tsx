@@ -37,7 +37,7 @@ export default function Home() {
 
   const DeoxysContainer = () => {
     return (
-      <div className="flex">
+      <div className="flex flex-wrap justify-center">
         <Link to={`/deoxys-normal`}>
           <PokemonContainer
             pokemonId={202}
