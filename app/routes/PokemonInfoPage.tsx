@@ -73,9 +73,12 @@ export default function PokemonInfoPage() {
         <div className="flex items-center flex-col w-fit mt-4 ml-8">
           <span>{text}:</span>
           <div className="flex">
-            <img className="w-30 h-30 bg-gray-100 rounded-lg" src={imgBack} />
             <img
-              className="w-30 h-30 bg-gray-100 rounded-lg ml-2"
+              className="w-30 h-30 bg-gray-100 rounded-lg object-scale-down"
+              src={imgBack}
+            />
+            <img
+              className="w-30 h-30 bg-gray-100 rounded-lg ml-2 object-scale-down"
               src={imgFront}
             />
           </div>
@@ -350,7 +353,7 @@ export default function PokemonInfoPage() {
                     )
                   </div>
                 ) : pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]
-                    ?.evolution_details[0]?.location.name != null ? (
+                    ?.evolution_details[0]?.location?.name != null ? (
                   <div className="capitalize">
                     (<span>Lvl up while being located at</span>&nbsp;
                     {
@@ -678,11 +681,11 @@ export default function PokemonInfoPage() {
               text="Black & White Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-v"]["black-white"]
-                  .back_default
+                  .animated.back_default
               }
               imgFront={
                 pokemonData.sprites.versions["generation-v"]["black-white"]
-                  .front_default
+                  .animated.front_default
               }
             />
 
@@ -690,12 +693,27 @@ export default function PokemonInfoPage() {
               text="B&W Shiny Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-v"]["black-white"]
-                  .back_shiny
+                  .animated.back_shiny
               }
               imgFront={
                 pokemonData.sprites.versions["generation-v"]["black-white"]
-                  .front_shiny
+                  .animated.front_shiny
               }
+            />
+          </div>
+
+          {/* Pokemon Showdown Sprites */}
+          <div className="flex flex-wrap justify-center">
+            <PokemonSpriteContainer
+              text="Showdown Sprites"
+              imgBack={pokemonData.sprites.other.showdown.back_default}
+              imgFront={pokemonData.sprites.other.showdown.front_default}
+            />
+
+            <PokemonSpriteContainer
+              text="Showdown Shiny Sprites"
+              imgBack={pokemonData.sprites.other.showdown.back_shiny}
+              imgFront={pokemonData.sprites.other.showdown.front_shiny}
             />
           </div>
 
