@@ -559,6 +559,112 @@ export default function PokemonInfoPage() {
             across the different generations:
           </span>
 
+          {/* Pokemon Red and Blue */}
+          <div className="flex flex-wrap justify-center">
+            <PokemonSpriteContainer
+              text="Red / Blue Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-i"]["red-blue"]
+                  .back_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-i"]["red-blue"]
+                  .front_default
+              }
+            />
+
+            <PokemonSpriteContainer
+              text="Original Gameboy R/B Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-i"]["red-blue"]
+                  .back_gray
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-i"]["red-blue"]
+                  .front_gray
+              }
+            />
+          </div>
+
+          {/* Pokemon Yellow */}
+          <div className="flex flex-wrap justify-center">
+            <PokemonSpriteContainer
+              text="Red / Blue Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-i"]["yellow"]
+                  .back_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-i"]["yellow"]
+                  .front_default
+              }
+            />
+
+            <PokemonSpriteContainer
+              text="Original Gameboy Yellow Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-i"]["yellow"].back_gray
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-i"]["yellow"]
+                  .front_gray
+              }
+            />
+          </div>
+
+          {/* Pokemon Gold and Silver */}
+          <div className="flex flex-wrap justify-center">
+            <PokemonSpriteContainer
+              text="Gold / Silver Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-ii"]["gold"]
+                  .back_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-ii"]["gold"]
+                  .front_default
+              }
+            />
+
+            <PokemonSpriteContainer
+              text="G/S Shiny Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-ii"]["gold"].back_shiny
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-ii"]["gold"]
+                  .front_shiny
+              }
+            />
+          </div>
+
+          {/* Pokemon Gold and Silver */}
+          <div className="flex flex-wrap justify-center">
+            <PokemonSpriteContainer
+              text="Crystal Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-ii"]["crystal"]
+                  .back_default
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-ii"]["crystal"]
+                  .front_default
+              }
+            />
+
+            <PokemonSpriteContainer
+              text="Crystal Shiny Sprites"
+              imgBack={
+                pokemonData.sprites.versions["generation-ii"]["crystal"]
+                  .back_shiny
+              }
+              imgFront={
+                pokemonData.sprites.versions["generation-ii"]["crystal"]
+                  .front_shiny
+              }
+            />
+          </div>
+
           {/* Pokemon Emerald Sprites (fetching ruby-sapphire becausefor some reason emerald object does not contain the back_default as a property) */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
