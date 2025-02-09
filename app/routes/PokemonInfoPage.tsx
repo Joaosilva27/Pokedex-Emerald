@@ -1,4 +1,5 @@
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { useParams } from "react-router";
 import axios from "axios";
 import PokeballLoadingIcon from "~/icons/pokeball.png";
@@ -179,18 +180,20 @@ export default function PokemonInfoPage() {
         ) : (
           pokemonEvolutionLine.chain.evolves_to[0]?.species?.name != null && (
             <div className="flex items-center">
-              <div className="flex flex-col items-center mr-4">
-                <img // fetching the 1st pokemon in evolution line (or the only pokemon in case of no evolution)
-                  src={`https://img.pokemondb.net/artwork/${pokemonEvolutionLine.chain.species.name}.jpg`}
-                  className="h-20 w-25 object-scale-down"
-                  alt={pokemonEvolutionLine.chain.species.name}
-                />
-                <span className="capitalize">
-                  {pokemonEvolutionLine.chain.species.name}
-                </span>
-              </div>
+              <a href={`/${pokemonEvolutionLine.chain.species.name}`}>
+                <div className="flex flex-col items-center mr-4">
+                  <img // fetching the 1st pokemon in evolution line (or the only pokemon in case of no evolution)
+                    src={`https://img.pokemondb.net/artwork/${pokemonEvolutionLine.chain.species.name}.jpg`}
+                    className="h-20 w-25 object-scale-down"
+                    alt={pokemonEvolutionLine.chain.species.name}
+                  />
+                  <span className="capitalize">
+                    {pokemonEvolutionLine.chain.species.name}
+                  </span>
+                </div>
+              </a>
 
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center text-center">
                 <span>
                   {pokemonEvolutionLine.chain.evolves_to[0] // The monstrosity from here below is due to my lazyness but I'm too burned out to fix it. 08/02/2025
                     ?.evolution_details[0]?.min_level != null ? (
@@ -234,22 +237,36 @@ export default function PokemonInfoPage() {
                       }
                       )
                     </div>
+                  ) : pokemonEvolutionLine.chain.evolves_to[0]
+                      ?.evolution_details[0]?.min_beauty != null ? (
+                    <div className="capitalize">
+                      (<span>Reach minimum beauty</span>&nbsp;
+                      {
+                        pokemonEvolutionLine.chain.evolves_to[0]
+                          .evolution_details[0].min_beauty
+                      }
+                      )
+                    </div>
                   ) : (
                     <div></div>
                   )}
                 </span>
                 <img src={PokemonEvolutionLineArrowIcon} className="w-10 h-5" />
               </div>
-              <div className="flex flex-col items-center ml-6 mr-6">
-                <img // fetching the 2nd pokemon in evolution line
-                  src={`https://img.pokemondb.net/artwork/${pokemonEvolutionLine.chain.evolves_to[0].species.name}.jpg`}
-                  className="h-20 w-25 object-scale-down"
-                  alt={pokemonEvolutionLine.chain.evolves_to[0].species.name}
-                />
-                <span className="capitalize">
-                  {pokemonEvolutionLine.chain.evolves_to[0].species.name}
-                </span>
-              </div>
+              <a
+                href={`/${pokemonEvolutionLine.chain.evolves_to[0].species.name}`}
+              >
+                <div className="flex flex-col items-center ml-6 mr-6">
+                  <img // fetching the 2nd pokemon in evolution line
+                    src={`https://img.pokemondb.net/artwork/${pokemonEvolutionLine.chain.evolves_to[0].species.name}.jpg`}
+                    className="h-20 w-25 object-scale-down"
+                    alt={pokemonEvolutionLine.chain.evolves_to[0].species.name}
+                  />
+                  <span className="capitalize">
+                    {pokemonEvolutionLine.chain.evolves_to[0].species.name}
+                  </span>
+                </div>
+              </a>
             </div>
           )
         )}
@@ -292,38 +309,52 @@ export default function PokemonInfoPage() {
                 ) : pokemonEvolutionLine.baby_trigger_item != null ? (
                   <span>({pokemonEvolutionLine.baby_trigger_item.name})</span>
                 ) : pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]
-                    ?.evolution_details[0]?.trigger.name != null ? (
+                    ?.evolution_details[0]?.min_beauty != null ? (
                   <div className="capitalize">
                     (
                     {
                       pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
-                        .evolution_details[0].trigger.name
+                        .evolution_details[0].min_beauty
+                    }
+                    )
+                  </div>
+                ) : pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]
+                    ?.evolution_details[0]?.min_happiness != null ? (
+                  <div className="capitalize">
+                    (<span>Reach minimum happiness</span>&nbsp;
+                    {
+                      pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
+                        .evolution_details[0].min_happiness
                     }
                     )
                   </div>
                 ) : (
-                  <div>This pokemon cannot evolve dumbass</div>
+                  <div></div>
                 )}
               </span>
               <img src={PokemonEvolutionLineArrowIcon} className="w-10 h-5" />
             </div>
 
-            <div className="flex flex-col items-center ml-6">
-              <img // fetching the 3rd pokemon in evolution line
-                src={`https://img.pokemondb.net/artwork/${pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0].species.name}.jpg`}
-                className="h-20 w-25 object-scale-down ml-4"
-                alt={
-                  pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0].species
-                    .name
-                }
-              />
-              <span className="capitalize">
-                {
-                  pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0].species
-                    .name
-                }
-              </span>
-            </div>
+            <a
+              href={`/${pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0].species.name}`}
+            >
+              <div className="flex flex-col items-center">
+                <img // fetching the 3rd pokemon in evolution line
+                  src={`https://img.pokemondb.net/artwork/${pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0].species.name}.jpg`}
+                  className="h-20 w-25 object-scale-down ml-4"
+                  alt={
+                    pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
+                      .species.name
+                  }
+                />
+                <span className="capitalize">
+                  {
+                    pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
+                      .species.name
+                  }
+                </span>
+              </div>
+            </a>
           </div>
         )}
       </div>
