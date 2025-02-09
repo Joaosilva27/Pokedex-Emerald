@@ -248,6 +248,26 @@ export default function PokemonInfoPage() {
                       }
                       )
                     </div>
+                  ) : pokemonEvolutionLine.chain.evolves_to[0]
+                      ?.evolution_details[0]?.location.name != null ? (
+                    <div className="capitalize">
+                      (<span>Lvl up while being located at</span>&nbsp;
+                      {
+                        pokemonEvolutionLine.chain.evolves_to[0]
+                          .evolution_details[0].location.name
+                      }
+                      )
+                    </div>
+                  ) : pokemonEvolutionLine.chain.evolves_to[0]
+                      ?.evolution_details[0]?.trigger.name != null ? (
+                    <div className="capitalize">
+                      (
+                      {
+                        pokemonEvolutionLine.chain.evolves_to[0]
+                          .evolution_details[0].trigger.name
+                      }
+                      )
+                    </div>
                   ) : (
                     <div></div>
                   )}
@@ -329,6 +349,26 @@ export default function PokemonInfoPage() {
                     }
                     )
                   </div>
+                ) : pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]
+                    ?.evolution_details[0]?.location.name != null ? (
+                  <div className="capitalize">
+                    (<span>Lvl up while being located at</span>&nbsp;
+                    {
+                      pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
+                        .evolution_details[0].location.name
+                    }
+                    )
+                  </div>
+                ) : pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]
+                    ?.evolution_details[0]?.trigger.name != null ? (
+                  <div className="capitalize">
+                    (
+                    {
+                      pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
+                        .evolution_details[0].trigger.name
+                    }
+                    )
+                  </div>
                 ) : (
                   <div></div>
                 )}
@@ -377,7 +417,7 @@ export default function PokemonInfoPage() {
       <div className="flex flex-wrap justify-center">
         <div className="w-80 h-90 flex flex-col items-center justify-center">
           <div className="flex items-center justify-center">
-            <div className="absolute flex flex-col">
+            <div className="absolute flex flex-col pt-5 pl-3">
               <Link to="/">
                 <img src={HomeIcon} className="w-5 h-5 relative right-40" />
                 <span className="relative right-40">Back</span>
