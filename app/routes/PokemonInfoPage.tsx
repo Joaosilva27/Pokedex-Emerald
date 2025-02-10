@@ -51,13 +51,10 @@ export default function PokemonInfoPage() {
   }, []);
 
   const PokemonSpriteContainer = ({ imgFront, imgBack, text, deviceIcon }) => {
-    {
-      /* For the pokemon that are not in a certain game the fetching result is always null */
-    }
-    if (imgFront == null) {
+    if (imgFront != null) {
       return (
         <div>
-          <div className="flex items-center flex-col w-fit m-4">
+          <div className="flex items-center flex-col w-fit mt-4 ml-8">
             <div className="flex">
               {deviceIcon && (
                 <img
@@ -65,49 +62,22 @@ export default function PokemonInfoPage() {
                   src={deviceIcon}
                 />
               )}
-
               <span>{text}:</span>
             </div>
-
             <div className="flex">
-              <div className="w-60 h-30 bg-gray-100 rounded-lg flex justify-center items-center text-xl text-center">
-                <span>
-                  <span className="capitalize">{params.PokemonName}</span> does
-                  not appear in this game or there is no image from PokeAPI
-                  database.
-                </span>
-              </div>
+              <img
+                className="w-30 h-30 bg-gray-100 rounded-lg object-scale-down"
+                src={imgBack}
+              />
+              <img
+                className="w-30 h-30 bg-gray-100 rounded-lg ml-2 object-scale-down"
+                src={imgFront}
+              />
             </div>
           </div>
         </div>
       );
     }
-
-    return (
-      <div>
-        <div className="flex items-center flex-col w-fit mt-4 ml-8">
-          <div className="flex">
-            {deviceIcon && (
-              <img
-                className="h-7 w-7 mr-1 object-scale-down"
-                src={deviceIcon}
-              />
-            )}
-            <span>{text}:</span>
-          </div>
-          <div className="flex">
-            <img
-              className="w-30 h-30 bg-gray-100 rounded-lg object-scale-down"
-              src={imgBack}
-            />
-            <img
-              className="w-30 h-30 bg-gray-100 rounded-lg ml-2 object-scale-down"
-              src={imgFront}
-            />
-          </div>
-        </div>
-      </div>
-    );
   };
 
   const PokemonBaseStatsTotal = () => {
