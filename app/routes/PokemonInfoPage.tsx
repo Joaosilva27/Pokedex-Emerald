@@ -5,6 +5,11 @@ import axios from "axios";
 import PokeballLoadingIcon from "~/icons/pokeball.png";
 import HomeIcon from "~/icons/home.png";
 import PokemonEvolutionLineArrowIcon from "~/icons/arrow.png";
+import GameboyIcon from "~/icons/gb.png";
+import GameboyColorIcon from "~/icons/gbc.jpg";
+import GameboyAdvanceIcon from "~/icons/gba.png";
+import NintendoIcon from "~/icons/dsi.png";
+import Nintendo3dsIcon from "~/icons/3ds.png";
 
 export default function PokemonInfoPage() {
   const params = useParams();
@@ -45,7 +50,7 @@ export default function PokemonInfoPage() {
       });
   }, []);
 
-  const PokemonSpriteContainer = ({ imgFront, imgBack, text }) => {
+  const PokemonSpriteContainer = ({ imgFront, imgBack, text, deviceIcon }) => {
     {
       /* For the pokemon that are not in a certain game the fetching result is always null */
     }
@@ -53,7 +58,17 @@ export default function PokemonInfoPage() {
       return (
         <div>
           <div className="flex items-center flex-col w-fit m-4">
-            <span>{text}:</span>
+            <div className="flex">
+              {deviceIcon && (
+                <img
+                  className="h-7 w-7 mr-1 object-scale-down"
+                  src={deviceIcon}
+                />
+              )}
+
+              <span>{text}:</span>
+            </div>
+
             <div className="flex">
               <div className="w-60 h-30 bg-gray-100 rounded-lg flex justify-center items-center text-xl text-center">
                 <span>
@@ -71,7 +86,15 @@ export default function PokemonInfoPage() {
     return (
       <div>
         <div className="flex items-center flex-col w-fit mt-4 ml-8">
-          <span>{text}:</span>
+          <div className="flex">
+            {deviceIcon && (
+              <img
+                className="h-7 w-7 mr-1 object-scale-down"
+                src={deviceIcon}
+              />
+            )}
+            <span>{text}:</span>
+          </div>
           <div className="flex">
             <img
               className="w-30 h-30 bg-gray-100 rounded-lg object-scale-down"
@@ -562,7 +585,8 @@ export default function PokemonInfoPage() {
           {/* Pokemon Red and Blue */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
-              text="Red / Blue Sprites"
+              deviceIcon={GameboyColorIcon}
+              text="Gameboy Color Red / Blue Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-i"]["red-blue"]
                   .back_default
@@ -574,6 +598,7 @@ export default function PokemonInfoPage() {
             />
 
             <PokemonSpriteContainer
+              deviceIcon={GameboyIcon}
               text="Original Gameboy R/B Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-i"]["red-blue"]
@@ -589,7 +614,8 @@ export default function PokemonInfoPage() {
           {/* Pokemon Yellow */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
-              text="Red / Blue Sprites"
+              deviceIcon={GameboyColorIcon}
+              text="Gameboy Color Yellow Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-i"]["yellow"]
                   .back_default
@@ -601,6 +627,7 @@ export default function PokemonInfoPage() {
             />
 
             <PokemonSpriteContainer
+              deviceIcon={GameboyIcon}
               text="Original Gameboy Yellow Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-i"]["yellow"].back_gray
@@ -615,6 +642,7 @@ export default function PokemonInfoPage() {
           {/* Pokemon Gold and Silver */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
+              deviceIcon={GameboyColorIcon}
               text="Gold / Silver Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-ii"]["gold"]
@@ -627,6 +655,7 @@ export default function PokemonInfoPage() {
             />
 
             <PokemonSpriteContainer
+              deviceIcon={GameboyColorIcon}
               text="G/S Shiny Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-ii"]["gold"].back_shiny
@@ -641,6 +670,7 @@ export default function PokemonInfoPage() {
           {/* Pokemon Gold and Silver */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
+              deviceIcon={GameboyColorIcon}
               text="Crystal Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-ii"]["crystal"]
@@ -653,6 +683,7 @@ export default function PokemonInfoPage() {
             />
 
             <PokemonSpriteContainer
+              deviceIcon={GameboyColorIcon}
               text="Crystal Shiny Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-ii"]["crystal"]
@@ -668,6 +699,7 @@ export default function PokemonInfoPage() {
           {/* Pokemon Emerald Sprites (fetching ruby-sapphire becausefor some reason emerald object does not contain the back_default as a property) */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
+              deviceIcon={GameboyAdvanceIcon}
               text="Emerald Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
@@ -680,6 +712,7 @@ export default function PokemonInfoPage() {
             />
 
             <PokemonSpriteContainer
+              deviceIcon={GameboyAdvanceIcon}
               text="Emerald Shiny Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-iii"]["ruby-sapphire"]
@@ -695,6 +728,7 @@ export default function PokemonInfoPage() {
           {/* Pokemon FireRed / LeafGreen Sprites  */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
+              deviceIcon={GameboyAdvanceIcon}
               text="FireRed / LeafGreen Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-iii"][
@@ -709,6 +743,7 @@ export default function PokemonInfoPage() {
             />
 
             <PokemonSpriteContainer
+              deviceIcon={GameboyAdvanceIcon}
               text="FR / LF Shiny Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-iii"][
@@ -726,6 +761,7 @@ export default function PokemonInfoPage() {
           {/* Pokemon Platinum Sprites (once again fetching from different versions (pearl/diamond) due to platinum object not having all the right properties)  */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
+              deviceIcon={NintendoIcon}
               text="Platinum Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
@@ -738,6 +774,7 @@ export default function PokemonInfoPage() {
             />
 
             <PokemonSpriteContainer
+              deviceIcon={NintendoIcon}
               text="Platinum Shiny Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-iv"]["diamond-pearl"]
@@ -753,6 +790,7 @@ export default function PokemonInfoPage() {
           {/* Pokemon HeartGold / SoulSilver Sprites */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
+              deviceIcon={NintendoIcon}
               text="HeartGold / SoulSilver Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-iv"][
@@ -767,6 +805,7 @@ export default function PokemonInfoPage() {
             />
 
             <PokemonSpriteContainer
+              deviceIcon={NintendoIcon}
               text="HG / SS Shiny Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-iv"][
@@ -784,6 +823,7 @@ export default function PokemonInfoPage() {
           {/* Pokemon Black & White Sprites */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
+              deviceIcon={NintendoIcon}
               text="Black & White Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-v"]["black-white"]
@@ -796,6 +836,7 @@ export default function PokemonInfoPage() {
             />
 
             <PokemonSpriteContainer
+              deviceIcon={NintendoIcon}
               text="B&W Shiny Sprites"
               imgBack={
                 pokemonData.sprites.versions["generation-v"]["black-white"]
@@ -808,74 +849,45 @@ export default function PokemonInfoPage() {
             />
           </div>
 
-          {/* Pokemon Showdown Sprites */}
+          {/* Pokemon Sprites for all 3ds games. Fetching from showdown due to none of the 3ds entries endpoints having back_default sprites */}
           <div className="flex flex-wrap justify-center">
             <PokemonSpriteContainer
-              text="Showdown Sprites"
+              deviceIcon={Nintendo3dsIcon}
+              text="X&Y, ORAS and Sun/Moon Sprites"
               imgBack={pokemonData.sprites.other.showdown.back_default}
               imgFront={pokemonData.sprites.other.showdown.front_default}
             />
 
             <PokemonSpriteContainer
-              text="Showdown Shiny Sprites"
+              deviceIcon={Nintendo3dsIcon}
+              text="X&Y, ORAS and S/M Shiny Sprites"
               imgBack={pokemonData.sprites.other.showdown.back_shiny}
               imgFront={pokemonData.sprites.other.showdown.front_shiny}
             />
           </div>
 
-          {/* For some reason PokeAPI does not have 'back' sprites from this generation on,
-       so I will be showing only the front and its shiny version */}
-
-          {/* Pokemon X & Y */}
+          {/* Other Pokemon artwork/sprites */}
           <div className=" flex flex-col justify-center mt-10">
             <span className=" text-center text-xl underline">
-              Due to PokeAPI limitations, from X/Y generation forward only front
-              sprites of Pokemon can be shown{" "}
+              Other artwork{" "}
             </span>
             <div className="flex flex-wrap justify-center">
               <PokemonSpriteContainer
-                text="X & Y Default and Shiny Sprites"
-                imgBack={
-                  pokemonData.sprites.versions["generation-vi"]["x-y"]
-                    .front_default
-                }
-                imgFront={
-                  pokemonData.sprites.versions["generation-vi"]["x-y"]
-                    .front_shiny
-                }
+                text="Pokemon Dream World and Pokemon Home"
+                imgBack={pokemonData.sprites.other.home.front_default}
+                imgFront={pokemonData.sprites.other.dream_world.front_default}
               />
 
-              {/* Pokemon OmegaRuby / AlphraSapphire Sprites */}
               <PokemonSpriteContainer
-                text="OmegaRuby / AlphaSapphire Default and Shiny Sprites"
+                text="Official Artwork Normal/Shiny"
                 imgBack={
-                  pokemonData.sprites.versions["generation-vi"][
-                    "omegaruby-alphasapphire"
-                  ].front_default
+                  pokemonData.sprites.other["official-artwork"].front_default
                 }
                 imgFront={
-                  pokemonData.sprites.versions["generation-vi"][
-                    "omegaruby-alphasapphire"
-                  ].front_shiny
+                  pokemonData.sprites.other["official-artwork"].front_shiny
                 }
               />
             </div>
-          </div>
-          <div className="flex justify-center">
-            {/* Pokemon Ultra-Sun / Ultra-Moon Sprites */}
-            <PokemonSpriteContainer
-              text="Ultra-Sun / Ultra-Moon Sprites"
-              imgBack={
-                pokemonData.sprites.versions["generation-vii"][
-                  "ultra-sun-ultra-moon"
-                ].front_default
-              }
-              imgFront={
-                pokemonData.sprites.versions["generation-vii"][
-                  "ultra-sun-ultra-moon"
-                ].front_shiny
-              }
-            />
           </div>
         </div>
 
@@ -899,8 +911,9 @@ export default function PokemonInfoPage() {
             </div>
           ) : (
             <div>
-              PokeAPI does not have any pokedex entries. If the Pokémon you are
-              viewing has a normal-form, please check its page instead.
+              Could not fetch data from PokeAPI for any pokedex entries. If the
+              Pokémon you are viewing has a normal-form, please check its page
+              instead.
             </div>
           )}
         </div>
