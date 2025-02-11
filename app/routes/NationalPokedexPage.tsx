@@ -19,7 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("https://pokeapi.co/api/v2/pokedex/hoenn/")
+      .get("https://pokeapi.co/api/v2/pokedex/1")
       .then((res) => {
         const data = res.data.pokemon_entries;
 
@@ -34,56 +34,18 @@ export default function Home() {
       });
   }, []);
 
-  const DeoxysContainer = () => {
-    return (
-      <div className="flex flex-wrap justify-center">
-        <Link to={`/deoxys-normal`}>
-          <PokemonContainer
-            pokemonId={202}
-            pokemonName="Deoxys-Normal"
-            pokemonImg={`https://img.pokemondb.net/artwork/deoxys.jpg`}
-          />
-        </Link>
-
-        <Link to={`/deoxys-attack`}>
-          <PokemonContainer
-            pokemonId={203}
-            pokemonName="Deoxys-ATK"
-            pokemonImg={`https://img.pokemondb.net/artwork/deoxys-attack.jpg`}
-          />
-        </Link>
-
-        <Link to={`/deoxys-defense`}>
-          <PokemonContainer
-            pokemonId={204}
-            pokemonName="Deoxys-DEF"
-            pokemonImg={`https://img.pokemondb.net/artwork/deoxys-defense.jpg`}
-          />
-        </Link>
-
-        <Link to={`/deoxys-speed`}>
-          <PokemonContainer
-            pokemonId={205}
-            pokemonName="Deoxys-SPD"
-            pokemonImg={`https://img.pokemondb.net/artwork/deoxys-speed.jpg`}
-          />
-        </Link>
-      </div>
-    );
-  };
-
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex items-center justify-center m-4">
         <h1 className="text-4xl">
-          Pokémon <span className="text-emerald-600">Emerald</span> Pokédex
+          Pokémon <span className="text-red-600">National</span> Pokédex
         </h1>
       </div>
-      <Link to="/national">
+      <Link to="/">
         <button className="flex items-center justify-center cursor-pointer">
           <h1 className="text-xl">
             <span>Click here to view the&nbsp;</span>
-            <span className="text-red-600">National</span> Pokédex instead.
+            <span className="text-emerald-600">Emerald</span> Pokédex instead.
           </h1>
         </button>
       </Link>
