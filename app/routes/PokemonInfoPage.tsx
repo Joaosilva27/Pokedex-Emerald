@@ -304,11 +304,11 @@ export default function PokemonInfoPage() {
                     )
                   </span>
                 ) : pokemonEvolutionLine.chain.evolves_to[0]?.evolves_to[0]
-                    ?.evolution_details[0]?.held_item != null ? (
+                    ?.evolution_details[0]?.held_item?.name != null ? (
                   <span className="capitalize">
                     (
                     {
-                      pokemonEvolutionLine.chain.evolves_to[0]
+                      pokemonEvolutionLine.chain.evolves_to[0].evolves_to[0]
                         .evolution_details[0].held_item.name
                     }
                     )

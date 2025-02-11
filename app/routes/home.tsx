@@ -80,7 +80,7 @@ export default function Home() {
         </h1>
       </div>
       <Link to="/national">
-        <button className="flex items-center justify-center cursor-pointer">
+        <button className="flex items-center justify-center cursor-pointer underline">
           <h1 className="text-xl">
             <span>Click here to view the&nbsp;</span>
             <span className="text-red-600">National</span> Pokédex instead.
@@ -99,7 +99,7 @@ export default function Home() {
         </div>
       ) : (
         <div className="flex flex-row justify-center flex-wrap p-10 pt-2">
-          {pokemonData.map((data, index) => (
+          {pokemonData.slice(0, 201).map((data, index) => (
             <>
               <Link to={`/${data.pokemon_species.name}`}>
                 <PokemonContainer
@@ -111,6 +111,7 @@ export default function Home() {
               </Link>
             </>
           ))}
+          <DeoxysContainer />
         </div>
       )}
     </div>
