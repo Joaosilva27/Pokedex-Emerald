@@ -85,7 +85,7 @@ export default function Home() {
       ) : (
         <div className="flex flex-row justify-center flex-wrap p-10 pt-2">
           {pokemonData.map((data, index) => (
-            <Link key={index} to={`/${data.pokemon_species.name}`}>
+            <Link key={index} to={`/${data.entry_number}`}>
               <PokemonContainer
                 pokemonId={data.entry_number}
                 pokemonName={data.pokemon_species.name}

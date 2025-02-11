@@ -245,7 +245,7 @@ export default function PokemonInfoPage() {
                       )
                     </div>
                   ) : pokemonEvolutionLine.chain.evolves_to[0]
-                      ?.evolution_details[0]?.location.name != null ? (
+                      ?.evolution_details[0]?.location?.name != null ? (
                     <div className="capitalize">
                       (<span>Lvl up while being located at</span>&nbsp;
                       {
@@ -419,13 +419,13 @@ export default function PokemonInfoPage() {
                 <span className="relative right-40">Back</span>
               </button>
             </div>
-            <h1 className="text-4xl capitalize">{params.PokemonName}</h1>
+            <h1 className="text-4xl capitalize">{pokemonData.name}</h1>
           </div>
 
           <img
             className="w-full h-full object-contain p-4"
-            src={`https://img.pokemondb.net/artwork/${params.PokemonName}.jpg`}
-            alt={params.PokemonName}
+            src={`https://img.pokemondb.net/artwork/${pokemonData.name}.jpg`}
+            alt={pokemonData.name}
           />
 
           {/* Play the pokemon's cry */}
@@ -437,7 +437,7 @@ export default function PokemonInfoPage() {
               playSound.play();
             }}
           >
-            {params.PokemonName}'s cry{" "}
+            {pokemonData.name}'s cry{" "}
             <img
               src={`https://github.com/msikma/pokesprite/blob/master/icons/pokemon/regular/${params.PokemonName}.png?raw=true`}
               className="w-fit h-10 animate-bounce animate-infinite"
@@ -547,9 +547,8 @@ export default function PokemonInfoPage() {
       {/* Pokemon Sprites */}
       <div className="flex justify-center flex-wrap">
         <div className="text-center mt-8 mr-10">
-          <span className="text-2xl">
-            <span className="capitalize">{params.PokemonName}</span>'s sprites
-            across the different generations:
+          <span className="text-2xl capitalize">
+            {pokemonData.name}'s sprites across the different generations:
           </span>
 
           {/* Pokemon Red and Blue */}
@@ -864,7 +863,7 @@ export default function PokemonInfoPage() {
         {/* Pokedex entries in english */}
         <div className="flex justify-center text-center mt-8 flex-wrap max-w-150">
           <div className="text-2xl capitalize">
-            <span>{params.PokemonName}</span>'s Pokédex entries across the
+            <span>{pokemonData.name}</span>'s Pokédex entries across the
             different generations:
           </div>
           {pokedexEntries ? (
