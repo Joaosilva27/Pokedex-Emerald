@@ -168,7 +168,7 @@ export default function PokemonInfoPage() {
         {pokemonEvolutionLine.chain.species.name != null &&
         pokemonEvolutionLine.chain.evolves_to[0]?.species?.name == null ? (
           <div className="text-center">
-            <span className="capitalize">{params.PokemonName}&nbsp;</span>
+            <span className="capitalize">{pokemonData.name}&nbsp;</span>
             <span>
               does not have regular evolutions in any of the Pokémon games
               (ignoring Mega Evolutions).
@@ -439,7 +439,7 @@ export default function PokemonInfoPage() {
           >
             {pokemonData.name}'s cry{" "}
             <img
-              src={`https://github.com/msikma/pokesprite/blob/master/icons/pokemon/regular/${params.PokemonName}.png?raw=true`}
+              src={`https://github.com/msikma/pokesprite/blob/master/icons/pokemon/regular/${pokemonData.name}.png?raw=true`}
               className="w-fit h-10 animate-bounce animate-infinite"
               onError={(e) => {
                 e.target.style.display = "none";
