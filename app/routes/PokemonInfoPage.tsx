@@ -419,7 +419,23 @@ export default function PokemonInfoPage() {
                 <span className="relative right-40">Back</span>
               </button>
             </div>
-            <h1 className="text-4xl capitalize">{pokemonData.name}</h1>
+            <div className="flex flex-col items-center">
+              <h1 className="text-4xl capitalize">{pokemonData.name}</h1>
+              <span>
+                <span className="capitalize">{pokemonData.name}</span> is a
+                <span>
+                  {pokemonData.types.map((array) => {
+                    return (
+                      <span className="ml-1 capitalize">{array.type.name}</span>
+                    );
+                  })}{" "}
+                  type Pokémon
+                </span>
+              </span>
+              <span className="capitalize">
+                Introduced in {pokedexEntries?.generation.name}
+              </span>
+            </div>
           </div>
 
           <img
