@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link } from "react-router";
 import PokeballLoadingIcon from "~/icons/pokeball.png";
 import PokemonContainer from "~/components/PokemonContainer";
+import SearchBarIcon from "~/icons/glass.png";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -16,6 +17,10 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   const [pokemonData, setPokemonData] = useState<Array<any>>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchInput, setSearchInput] = useState<any>("");
+  const [originalPokemonData, setOriginalPokemonData] = useState<Array<any>>(
+    []
+  );
 
   useEffect(() => {
     axios
@@ -24,6 +29,7 @@ export default function Home() {
         const data = res.data.pokemon_entries;
 
         setPokemonData(data);
+        setOriginalPokemonData(data);
         console.log(data);
       })
       .catch((error) => {
@@ -72,6 +78,22 @@ export default function Home() {
     );
   };
 
+  const onPokemonSearch = (e) => {
+    e.preventDefault();
+    if (searchInput === "") {
+      setPokemonData(originalPokemonData);
+    } else {
+      // Filter based on the search input
+      const filteredResults = originalPokemonData.filter(
+        (pokemon) =>
+          pokemon.pokemon_species.name
+            .toLowerCase()
+            .includes(searchInput.toLowerCase()) // Case-insensitive filter
+      );
+      setPokemonData(filteredResults);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex items-center justify-center m-4">
@@ -87,6 +109,17 @@ export default function Home() {
           </h1>
         </button>
       </Link>
+      <form className="text-lg flex justify-center" onSubmit={onPokemonSearch}>
+        <input
+          className="focus:outline-none"
+          onChange={(e) => setSearchInput(e.target.value)}
+          value={searchInput}
+          placeholder="Search for a Pokémon..."
+        ></input>
+        <button type="button" onClick={onPokemonSearch}>
+          <img className="w-5 h-5" src={SearchBarIcon} />
+        </button>
+      </form>
 
       <Outlet />
 

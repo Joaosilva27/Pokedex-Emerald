@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 import PokeballLoadingIcon from "~/icons/pokeball.png";
-import SearchBarIcon from "~/icons/glass.jpg";
+import SearchBarIcon from "~/icons/glass.png";
 import PokemonContainer from "~/components/PokemonContainer";
 
 export default function Home() {
@@ -32,7 +32,6 @@ export default function Home() {
 
   const onPokemonSearch = (e) => {
     e.preventDefault();
-    // If searchInput is empty, reset to original data
     if (searchInput === "") {
       setPokemonData(originalPokemonData);
     } else {
@@ -62,16 +61,14 @@ export default function Home() {
           </h1>
         </button>
       </Link>
-      <form className="text-lg flex justify-center">
+      <form className="text-lg flex justify-center" onSubmit={onPokemonSearch}>
         <input
-          onChange={(e) => setSearchInput(e.target.value)} // Update searchInput as you type
+          className="focus:outline-none"
+          onChange={(e) => setSearchInput(e.target.value)}
           value={searchInput}
           placeholder="Search for a Pokémon..."
         ></input>
-        <button
-          type="button"
-          onClick={onPokemonSearch} // Trigger search on click
-        >
+        <button type="button" onClick={onPokemonSearch}>
           <img className="w-5 h-5" src={SearchBarIcon} />
         </button>
       </form>
