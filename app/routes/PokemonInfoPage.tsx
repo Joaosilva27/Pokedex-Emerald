@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
-import { useParams } from "react-router";
+import { Link, useParams, useNavigate } from "react-router";
 import axios from "axios";
 import PokeballLoadingIcon from "~/icons/pokeball.png";
 import HomeIcon from "~/icons/home.png";
@@ -13,6 +12,7 @@ import Nintendo3dsIcon from "~/icons/3ds.png";
 
 export default function PokemonInfoPage() {
   const params = useParams();
+  const navigate = useNavigate();
   const [pokemonData, setPokemonData] = useState<any | null>(null);
   const [pokedexEntries, setPokedexEntries] = useState<any | null>(null);
   const [pokemonEvolutionLine, setPokemonEvolutionLine] = useState<any | null>(
@@ -414,10 +414,10 @@ export default function PokemonInfoPage() {
         <div className="w-80 h-90 flex flex-col items-center justify-center">
           <div className="flex items-center justify-center">
             <div className="absolute flex flex-col pt-5 pl-3">
-              <Link to="/">
+              <button onClick={() => navigate(-1)} className="cursor-pointer">
                 <img src={HomeIcon} className="w-5 h-5 relative right-40" />
                 <span className="relative right-40">Back</span>
-              </Link>
+              </button>
             </div>
             <h1 className="text-4xl capitalize">{params.PokemonName}</h1>
           </div>
