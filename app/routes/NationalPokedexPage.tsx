@@ -1,30 +1,26 @@
 import { Outlet } from "react-router";
-import type { Route } from "./+types/home";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 import PokeballLoadingIcon from "~/icons/pokeball.png";
+import SearchBarIcon from "~/icons/glass.jpg";
 import PokemonContainer from "~/components/PokemonContainer";
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "Emerald Pokedex" },
-    { name: "description", content: "Emerald Pokedex" },
-  ];
-}
 
 export default function Home() {
   const [pokemonData, setPokemonData] = useState<Array<any>>([]);
+  const [originalPokemonData, setOriginalPokemonData] = useState<Array<any>>(
+    []
+  );
   const [isLoading, setIsLoading] = useState(true);
+  const [searchInput, setSearchInput] = useState<any>("");
 
   useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/pokedex/1")
       .then((res) => {
         const data = res.data.pokemon_entries;
-
         setPokemonData(data);
-        console.log(data);
+        setOriginalPokemonData(data);
       })
       .catch((error) => {
         console.log(`Error trying to fetch the data: ${error}`);
@@ -34,6 +30,23 @@ export default function Home() {
       });
   }, []);
 
+  const onPokemonSearch = (e) => {
+    e.preventDefault();
+    // If searchInput is empty, reset to original data
+    if (searchInput === "") {
+      setPokemonData(originalPokemonData);
+    } else {
+      // Filter based on the search input
+      const filteredResults = originalPokemonData.filter(
+        (pokemon) =>
+          pokemon.pokemon_species.name
+            .toLowerCase()
+            .includes(searchInput.toLowerCase()) // Case-insensitive filter
+      );
+      setPokemonData(filteredResults);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex items-center justify-center m-4">
@@ -42,13 +55,26 @@ export default function Home() {
         </h1>
       </div>
       <Link to="/">
-        <button className="flex items-center justify-center cursor-pointer">
+        <button className="flex items-center justify-center cursor-pointer underline">
           <h1 className="text-xl">
             <span>Click here to view the&nbsp;</span>
             <span className="text-emerald-600">Emerald</span> Pokédex instead.
           </h1>
         </button>
       </Link>
+      <form className="text-lg flex justify-center">
+        <input
+          onChange={(e) => setSearchInput(e.target.value)} // Update searchInput as you type
+          value={searchInput}
+          placeholder="Search for a Pokémon..."
+        ></input>
+        <button
+          type="button"
+          onClick={onPokemonSearch} // Trigger search on click
+        >
+          <img className="w-5 h-5" src={SearchBarIcon} />
+        </button>
+      </form>
 
       <Outlet />
 
@@ -62,16 +88,13 @@ export default function Home() {
       ) : (
         <div className="flex flex-row justify-center flex-wrap p-10 pt-2">
           {pokemonData.map((data, index) => (
-            <>
-              <Link to={`/${data.pokemon_species.name}`}>
-                <PokemonContainer
-                  key={index}
-                  pokemonId={data.entry_number}
-                  pokemonName={data.pokemon_species.name}
-                  pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
-                />
-              </Link>
-            </>
+            <Link key={index} to={`/${data.pokemon_species.name}`}>
+              <PokemonContainer
+                pokemonId={data.entry_number}
+                pokemonName={data.pokemon_species.name}
+                pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
+              />
+            </Link>
           ))}
         </div>
       )}
