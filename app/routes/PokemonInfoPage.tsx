@@ -881,22 +881,34 @@ export default function PokemonInfoPage() {
               />
             </div>
           </div>
-          <div className="mt-10">
+          <div className="mt-10 flex flex-col justify-center">
             <span className="text-2xl capitalize">
               {pokemonData.name}'s moves learnt by level-up:
             </span>
-            {pokemonData.moves
-              .filter(
-                (array) => array.version_group_details[0].level_learned_at != 0 // filtering for moves learnt by level up
-              )
-              .map((array) => (
-                <div className="capitalize">
-                  <span className="mr-2">{array.move.name}</span>
-                  <span>
-                    Lvl {array.version_group_details[0].level_learned_at}
-                  </span>
-                </div>
-              ))}
+            <div className="capitalize">
+              <HotTable
+                rowHeaders={false}
+                colHeaders={["Lvl", "Name"]}
+                data={pokemonData.moves
+                  .filter(
+                    (array) =>
+                      array.version_group_details[0].level_learned_at !== 0
+                  )
+                  .sort(
+                    (a, b) =>
+                      a.version_group_details[0].level_learned_at -
+                      b.version_group_details[0].level_learned_at
+                  )
+                  .map((array) => [
+                    array.version_group_details[0].level_learned_at,
+                    array.move.name,
+                  ])}
+                height="auto"
+                autoWrapRow={true}
+                autoWrapCol={true}
+                licenseKey="non-commercial-and-evaluation"
+              />
+            </div>
           </div>
         </div>
 
