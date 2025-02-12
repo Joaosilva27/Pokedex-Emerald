@@ -889,7 +889,7 @@ export default function PokemonInfoPage() {
               className="capitalize"
               style={{
                 margin: "0 auto",
-                width: "11rem", // the only way i could find to center the table
+                width: "10rem", // the only way i could find to center the table
               }}
             >
               <HotTable
@@ -922,7 +922,7 @@ export default function PokemonInfoPage() {
               className="capitalize"
               style={{
                 margin: "0 auto",
-                width: "13rem",
+                width: "12rem",
               }}
             >
               <HotTable
@@ -975,7 +975,7 @@ export default function PokemonInfoPage() {
         </div>
         <div className=" capitalize mt-8 ml-8 flex flex-col">
           <span className="text-2xl">
-            {pokemonData.name} in other languages:
+            {pokemonData.name}'s name in other languages:
           </span>
           <div className="bg-gray-100 p-4 mt-2 flex flex-col">
             <span>
@@ -1006,6 +1006,55 @@ export default function PokemonInfoPage() {
               <span className="text-lg mr-1 text-gray-500">German:</span>{" "}
               <span className="text-xl">{pokedexEntries?.names[5].name}</span>
             </span>
+          </div>
+          <div className=" capitalize mt-8 ml-8 flex flex-col">
+            <span className="text-2xl">
+              {pokemonData.name} type in other languages:
+            </span>
+            <div className="bg-gray-100 p-4 mt-2 flex flex-col">
+              <span>
+                <span className="text-lg mr-1 text-gray-500">English:</span>{" "}
+                <span className="text-xl">
+                  {pokedexEntries?.genera[7].genus}
+                </span>
+              </span>
+              <span>
+                <span className="text-lg mr-1 text-gray-500">Japanese:</span>{" "}
+                <span className="text-xl">
+                  {pokedexEntries?.genera[0].genus}
+                </span>
+              </span>
+              <span>
+                <span className="text-lg mr-1 text-gray-500">Korean:</span>{" "}
+                <span className="text-sm">
+                  {pokedexEntries?.genera[1].genus}
+                </span>
+              </span>
+              <span>
+                <span className="text-lg mr-1 text-gray-500">Chinese:</span>{" "}
+                <span className="text-sm">
+                  {pokedexEntries?.genera[2].genus}
+                </span>
+              </span>
+              <span>
+                <span className="text-lg mr-1 text-gray-500">Spanish:</span>{" "}
+                <span className="text-xl">
+                  {pokedexEntries?.genera[5].genus}
+                </span>
+              </span>
+              <span>
+                <span className="text-lg mr-1 text-gray-500">French:</span>{" "}
+                <span className="text-xl">
+                  {pokedexEntries?.genera[3].genus}
+                </span>
+              </span>
+              <span>
+                <span className="text-lg mr-1 text-gray-500">German:</span>{" "}
+                <span className="text-xl">
+                  {pokedexEntries?.genera[4].genus}
+                </span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
