@@ -874,6 +874,23 @@ export default function PokemonInfoPage() {
               />
             </div>
           </div>
+          <div className="mt-10">
+            <span className="text-2xl capitalize">
+              {pokemonData.name}'s moves learnt by level-up:
+            </span>
+            {pokemonData.moves
+              .filter(
+                (array) => array.version_group_details[0].level_learned_at != 0 // filtering for moves learnt by level up
+              )
+              .map((array) => (
+                <div className="capitalize">
+                  <span className="mr-2">{array.move.name}</span>
+                  <span>
+                    Lvl {array.version_group_details[0].level_learned_at}
+                  </span>
+                </div>
+              ))}
+          </div>
         </div>
 
         {/* Pokedex entries in english */}
