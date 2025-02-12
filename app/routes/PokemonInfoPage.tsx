@@ -882,10 +882,16 @@ export default function PokemonInfoPage() {
             </div>
           </div>
           <div className="mt-10 flex flex-col justify-center">
-            <span className="text-2xl capitalize">
+            <span className="text-2xl capitalize mb-2">
               {pokemonData.name}'s moves learnt by level-up:
             </span>
-            <div className="capitalize">
+            <div
+              className="capitalize"
+              style={{
+                margin: "0 auto",
+                width: "11rem", // the only way i could find to center the table
+              }}
+            >
               <HotTable
                 rowHeaders={false}
                 colHeaders={["Lvl", "Name"]}
@@ -909,11 +915,40 @@ export default function PokemonInfoPage() {
                 licenseKey="non-commercial-and-evaluation"
               />
             </div>
+            <span className="text-2xl capitalize mb-2 mt-6">
+              {pokemonData.name}'s moves learnt by TM:
+            </span>
+            <div
+              className="capitalize"
+              style={{
+                margin: "0 auto",
+                width: "13rem",
+              }}
+            >
+              <HotTable
+                rowHeaders={false}
+                colHeaders={["Tutor/TM", "Name"]}
+                data={pokemonData.moves
+                  .filter(
+                    (array) =>
+                      array.version_group_details[0].level_learned_at == 0
+                  )
+
+                  .map((array) => [
+                    array.version_group_details[0].move_learn_method.name,
+                    array.move.name,
+                  ])}
+                height="auto"
+                autoWrapRow={true}
+                autoWrapCol={true}
+                licenseKey="non-commercial-and-evaluation"
+              />
+            </div>
           </div>
         </div>
 
         {/* Pokedex entries in english */}
-        <div className="flex justify-center text-center mt-8 flex-wrap max-w-150">
+        <div className="flex flex-col text-center mt-8 max-w-150">
           <div className="text-2xl capitalize">
             <span>{pokemonData.name}</span>'s Pokédex entries across the
             different generations:
@@ -937,6 +972,9 @@ export default function PokemonInfoPage() {
               instead.
             </div>
           )}
+        </div>
+        <div className="text-2xl capitalize mt-4 ml-8 flex flex-col">
+          <span>{pokemonData.name}</span> in other languages:
         </div>
       </div>
     </div>
