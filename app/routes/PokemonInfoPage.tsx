@@ -889,7 +889,7 @@ export default function PokemonInfoPage() {
               className="capitalize"
               style={{
                 margin: "0 auto",
-                width: "10rem", // the only way i could find to center the table
+                width: "13rem", // the only way i could find to center the table
               }}
             >
               <HotTable
@@ -922,7 +922,7 @@ export default function PokemonInfoPage() {
               className="capitalize"
               style={{
                 margin: "0 auto",
-                width: "12rem",
+                width: "15rem",
               }}
             >
               <HotTable
