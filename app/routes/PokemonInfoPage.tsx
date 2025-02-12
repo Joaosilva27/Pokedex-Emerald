@@ -9,6 +9,13 @@ import GameboyColorIcon from "~/icons/gbc.jpg";
 import GameboyAdvanceIcon from "~/icons/gba.png";
 import NintendoIcon from "~/icons/dsi.png";
 import Nintendo3dsIcon from "~/icons/3ds.png";
+import "handsontable/styles/handsontable.min.css";
+import "handsontable/styles/ht-theme-main.min.css";
+import Handsontable from "handsontable/base";
+import { registerAllModules } from "handsontable/registry";
+import { HotTable } from "@handsontable/react-wrapper";
+
+registerAllModules();
 
 export default function PokemonInfoPage() {
   const params = useParams();
