@@ -947,7 +947,7 @@ export default function PokemonInfoPage() {
           </div>
         </div>
 
-        {/* Pokedex entries in english */}
+        {/* Pokedex entries in english  */}
         <div className="flex flex-col text-center mt-8 max-w-150">
           <div className="text-2xl capitalize">
             <span>{pokemonData.name}</span>'s Pokédex entries across the
