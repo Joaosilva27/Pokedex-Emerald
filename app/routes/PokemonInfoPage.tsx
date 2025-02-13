@@ -980,31 +980,31 @@ export default function PokemonInfoPage() {
           <div className="bg-gray-100 p-4 mt-2 flex flex-col">
             <span>
               <span className="text-lg mr-1 text-gray-500">English:</span>{" "}
-              <span className="text-xl">{pokedexEntries?.names[8].name}</span>
+              <span className="text-xl">{pokedexEntries?.names[8]?.name}</span>
             </span>
             <span>
               <span className="text-lg mr-1 text-gray-500">Japanese:</span>{" "}
-              <span className="text-xl">{pokedexEntries?.names[0].name}</span>
+              <span className="text-xl">{pokedexEntries?.names[0]?.name}</span>
             </span>
             <span>
               <span className="text-lg mr-1 text-gray-500">Korean:</span>{" "}
-              <span className="text-sm">{pokedexEntries?.names[2].name}</span>
+              <span className="text-sm">{pokedexEntries?.names[2]?.name}</span>
             </span>
             <span>
               <span className="text-lg mr-1 text-gray-500">Chinese:</span>{" "}
-              <span className="text-sm">{pokedexEntries?.names[3].name}</span>
+              <span className="text-sm">{pokedexEntries?.names[3]?.name}</span>
             </span>
             <span>
               <span className="text-lg mr-1 text-gray-500">Spanish:</span>{" "}
-              <span className="text-xl">{pokedexEntries?.names[6].name}</span>
+              <span className="text-xl">{pokedexEntries?.names[6]?.name}</span>
             </span>
             <span>
               <span className="text-lg mr-1 text-gray-500">French:</span>{" "}
-              <span className="text-xl">{pokedexEntries?.names[4].name}</span>
+              <span className="text-xl">{pokedexEntries?.names[4]?.name}</span>
             </span>
             <span>
               <span className="text-lg mr-1 text-gray-500">German:</span>{" "}
-              <span className="text-xl">{pokedexEntries?.names[5].name}</span>
+              <span className="text-xl">{pokedexEntries?.names[5]?.name}</span>
             </span>
           </div>
           <div className=" capitalize mt-8 ml-8 flex flex-col">
@@ -1015,43 +1015,51 @@ export default function PokemonInfoPage() {
               <span>
                 <span className="text-lg mr-1 text-gray-500">English:</span>{" "}
                 <span className="text-xl">
-                  {pokedexEntries?.genera[7].genus}
+                  {pokedexEntries?.genera[7]?.genus ||
+                    pokedexEntries?.genera[5]?.genus ||
+                    "No database information"}
                 </span>
               </span>
               <span>
                 <span className="text-lg mr-1 text-gray-500">Japanese:</span>{" "}
                 <span className="text-xl">
-                  {pokedexEntries?.genera[0].genus}
+                  {pokedexEntries?.genera[0]?.genus ||
+                    "No database information"}
                 </span>
               </span>
               <span>
                 <span className="text-lg mr-1 text-gray-500">Korean:</span>{" "}
                 <span className="text-sm">
-                  {pokedexEntries?.genera[1].genus}
+                  {pokedexEntries?.genera[1]?.genus ||
+                    "No database information"}
                 </span>
               </span>
               <span>
                 <span className="text-lg mr-1 text-gray-500">Chinese:</span>{" "}
                 <span className="text-sm">
-                  {pokedexEntries?.genera[2].genus}
+                  {pokedexEntries?.genera[2]?.genus ||
+                    "No database information"}
                 </span>
               </span>
               <span>
                 <span className="text-lg mr-1 text-gray-500">Spanish:</span>{" "}
                 <span className="text-xl">
-                  {pokedexEntries?.genera[5].genus}
+                  {pokedexEntries?.genera[5]?.genus ||
+                    "No database information"}
                 </span>
               </span>
               <span>
                 <span className="text-lg mr-1 text-gray-500">French:</span>{" "}
                 <span className="text-xl">
-                  {pokedexEntries?.genera[3].genus}
+                  {pokedexEntries?.genera[3]?.genus ||
+                    "No database information"}
                 </span>
               </span>
               <span>
                 <span className="text-lg mr-1 text-gray-500">German:</span>{" "}
                 <span className="text-xl">
-                  {pokedexEntries?.genera[4].genus}
+                  {pokedexEntries?.genera[4]?.genus ||
+                    "No database information"}
                 </span>
               </span>
             </div>
