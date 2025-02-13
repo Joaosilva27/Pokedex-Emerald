@@ -417,8 +417,8 @@ export default function PokemonInfoPage() {
   return (
     <div className="flex flex-col items-center p-3">
       {/* Main Pokemon Image with its respective name */}
-      <div className="flex flex-wrap justify-center mt-5">
-        <div className="w-80 h-90 flex flex-col items-center justify-center">
+      <div className="flex flex-wrap justify-center">
+        <div className="w-80 h-90 flex flex-col items-center justify-center mt-12">
           <div className="flex items-center justify-center">
             <div className="absolute flex flex-col pt-5 pl-3">
               <button onClick={() => navigate(-1)} className="cursor-pointer">
