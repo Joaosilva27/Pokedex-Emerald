@@ -47,7 +47,10 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div
+      title="National Pokédex"
+      className="flex flex-col justify-center items-center"
+    >
       <div className="flex items-center justify-center m-4">
         <h1 className="text-4xl">
           Pokémon <span className="text-red-600">National</span> Pokédex

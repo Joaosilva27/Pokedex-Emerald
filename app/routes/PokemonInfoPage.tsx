@@ -415,7 +415,7 @@ export default function PokemonInfoPage() {
   }
 
   return (
-    <div className="flex flex-col items-center p-3">
+    <div title={pokemonData.name} className="flex flex-col items-center p-3">
       {/* Main Pokemon Image with its respective name */}
       <div className="flex flex-wrap justify-center">
         <div className="w-80 h-90 flex flex-col items-center justify-center mt-12 mb-5">
