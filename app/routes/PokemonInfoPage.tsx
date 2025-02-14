@@ -885,13 +885,7 @@ export default function PokemonInfoPage() {
             <span className="text-2xl capitalize mb-2">
               {pokemonData.name}'s moves learnt by level-up:
             </span>
-            <div
-              className="capitalize"
-              style={{
-                margin: "0 auto",
-                width: "13rem", // the only way i could find to center the table
-              }}
-            >
+            <div className="capitalize ml-20 lg:ml-40">
               <HotTable
                 rowHeaders={false}
                 colHeaders={["Lvl", "Name"]}
@@ -915,16 +909,10 @@ export default function PokemonInfoPage() {
                 licenseKey="non-commercial-and-evaluation"
               />
             </div>
-            <span className="text-2xl capitalize mb-2 mt-6">
+            <span className="text-2xl capitalize mb-2 mt-6 text-wrap">
               {pokemonData.name}'s moves learnt by TM / Tutor / Eggs:
             </span>
-            <div
-              className="capitalize"
-              style={{
-                margin: "0 auto",
-                width: "19rem",
-              }}
-            >
+            <div className="capitalize ml-2 lg:ml-40">
               <HotTable
                 rowHeaders={false}
                 colHeaders={["Tutor/TM", "Name"]}
