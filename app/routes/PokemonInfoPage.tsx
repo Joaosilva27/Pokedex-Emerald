@@ -922,7 +922,7 @@ export default function PokemonInfoPage() {
               className="capitalize"
               style={{
                 margin: "0 auto",
-                width: "15rem",
+                width: "19rem",
               }}
             >
               <HotTable
