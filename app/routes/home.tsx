@@ -131,20 +131,28 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-row justify-center flex-wrap p-10 pt-2">
-          {pokemonData.slice(0, 201).map((data, index) => (
-            <>
-              <Link to={`/${data.pokemon_species.name}`}>
-                <PokemonContainer
-                  key={index}
-                  pokemonId={data.entry_number}
-                  pokemonName={data.pokemon_species.name}
-                  pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
-                />
-              </Link>
-            </>
-          ))}
-          <DeoxysContainer />
+        <div>
+          {pokemonData && (
+            <div className="flex flex-row justify-center flex-wrap p-10 pt-2">
+              {pokemonData.length == 0 && (
+                <span>There are no results found for your search.</span>
+              )}
+              {pokemonData.slice(0, 201).map((data, index) => (
+                <>
+                  <Link to={`/${data.pokemon_species.name}`}>
+                    <PokemonContainer
+                      key={index}
+                      pokemonId={data.entry_number}
+                      pokemonName={data.pokemon_species.name}
+                      pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
+                    />
+                  </Link>
+                </>
+              ))}
+              {/* so only the 'no search found' text shows up */}
+              {pokemonData.length != 0 && <DeoxysContainer />}
+            </div>
+          )}
         </div>
       )}
     </div>
