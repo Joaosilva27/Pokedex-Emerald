@@ -86,16 +86,26 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-row justify-center flex-wrap p-10 pt-2">
-          {pokemonData.map((data, index) => (
-            <Link key={index} to={`/${data.entry_number}`}>
-              <PokemonContainer
-                pokemonId={data.entry_number}
-                pokemonName={data.pokemon_species.name}
-                pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
-              />
-            </Link>
-          ))}
+        <div>
+          {pokemonData && (
+            <div className="flex flex-row justify-center flex-wrap p-10 pt-2">
+              {pokemonData.length == 0 && (
+                <span>There are no results found for your search.</span>
+              )}
+              {pokemonData.map((data, index) => (
+                <>
+                  <Link to={`/${data.pokemon_species.name}`}>
+                    <PokemonContainer
+                      key={index}
+                      pokemonId={data.entry_number}
+                      pokemonName={data.pokemon_species.name}
+                      pokemonImg={`https://img.pokemondb.net/artwork/${data.pokemon_species.name}.jpg`}
+                    />
+                  </Link>
+                </>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
