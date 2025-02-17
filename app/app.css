@@ -17,3 +17,12 @@
 body {
   font-family: "Pokemon Emerald", sans-serif;
 }
+
+.centered-table {
+  width: auto !important;
+  margin: 0 auto;
+}
+.centered-table .htCore {
+  width: auto !important;
+  margin: 0 auto;
+}

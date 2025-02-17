@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import PokeballLoadingIcon from "~/icons/pokeball.png";
 import HomeIcon from "~/icons/home.png";
@@ -11,7 +11,6 @@ import NintendoIcon from "~/icons/dsi.png";
 import Nintendo3dsIcon from "~/icons/3ds.png";
 import "handsontable/styles/handsontable.min.css";
 import "handsontable/styles/ht-theme-main.min.css";
-import Handsontable from "handsontable/base";
 import { registerAllModules } from "handsontable/registry";
 import { HotTable } from "@handsontable/react-wrapper";
 
@@ -186,7 +185,7 @@ export default function PokemonInfoPage() {
             <div className="flex items-center">
               <a href={`/${pokemonEvolutionLine.chain.species.name}`}>
                 <div className="flex flex-col items-center mr-4">
-                  <img // fetching the 1st pokemon in evolution line (or the only pokemon in case of no evolution)
+                  <img // fetching the 1st pokemon in evolution line
                     src={`https://img.pokemondb.net/artwork/${pokemonEvolutionLine.chain.species.name}.jpg`}
                     className="h-20 w-25 object-scale-down"
                     alt={pokemonEvolutionLine.chain.species.name}
@@ -477,7 +476,7 @@ export default function PokemonInfoPage() {
             <span className="text-xl ml-1">{pokemonData.id}</span>
           </div>
           <div className="flex items-center justify-center border-b-1 mb-2 w-full p-2">
-            {/* Fetch pokemon type and conditionally get bg color. It's a mess but it is what it is */}
+            {/* Fetch pokemon type and conditionally get bg color */}
             <span className="text-gray-400 mr-1">Type</span>
 
             {pokemonData.types.map((array, key) => {

@@ -36,11 +36,10 @@ export default function Home() {
       setPokemonData(originalPokemonData);
     } else {
       // Filter based on the search input
-      const filteredResults = originalPokemonData.filter(
-        (pokemon) =>
-          pokemon.pokemon_species.name
-            .toLowerCase()
-            .includes(searchInput.toLowerCase()) // Case-insensitive filter
+      const filteredResults = originalPokemonData.filter((pokemon) =>
+        pokemon.pokemon_species.name
+          .toLowerCase()
+          .includes(searchInput.toLowerCase())
       );
       setPokemonData(filteredResults);
     }
@@ -90,7 +89,7 @@ export default function Home() {
           {pokemonData && (
             <div className="flex flex-row justify-center flex-wrap p-10 pt-2">
               {pokemonData.length == 0 && (
-                <span>There are no results found for your search.</span>
+                <span>There were no results found for your search.</span>
               )}
               {pokemonData.map((data, index) => (
                 <>

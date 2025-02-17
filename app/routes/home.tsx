@@ -84,11 +84,10 @@ export default function Home() {
       setPokemonData(originalPokemonData);
     } else {
       // Filter based on the search input
-      const filteredResults = originalPokemonData.filter(
-        (pokemon) =>
-          pokemon.pokemon_species.name
-            .toLowerCase()
-            .includes(searchInput.toLowerCase()) // Case-insensitive filter
+      const filteredResults = originalPokemonData.filter((pokemon) =>
+        pokemon.pokemon_species.name
+          .toLowerCase()
+          .includes(searchInput.toLowerCase())
       );
       setPokemonData(filteredResults);
     }
