@@ -57,6 +57,7 @@ https://github.com/user-attachments/assets/cd4c3e08-dd4f-40b2-a374-5dcbeddbe32a
 ## Technologies Used:
 
 - React JS
+- Typescript
 - [Tailwind](https://tailwindcss.com/)
 - [PokeAPI](https://pokeapi.co/) (had quite a few limitations, therefore there might be some fetching issues with pokemon from newer generation).
 - [Handsontable] for the pokemon moves table.
